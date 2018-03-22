@@ -11,29 +11,20 @@ package domain;
  */
 public class StudentEdu extends Student {
 
-    private String carrer, uid, size;
+    private String uid, size;
 
     public StudentEdu() {
         super();
-        this.carrer = "";
         this.uid = "E";
 
     }
 
     public StudentEdu(String carrer) {
         super();
-        this.carrer = carrer;
         this.uid = "E";
 
     }
 
-    public String getCarrer() {
-        return carrer;
-    }
-
-    public void setCarrer(String carrer) {
-        this.carrer = carrer;
-    }
 
     public void setUid(int anno, String uid) {
         String anno2 = String.valueOf(anno);
@@ -59,7 +50,7 @@ public class StudentEdu extends Student {
 
     @Override
     public String toString() {
-        return "StudentEdu{" + "name= " + super.getName() + ", lastName= " + super.getLastName() + ", carrer= " + carrer + ", year of income " + super.getYear() + ", uid= " + uid + '}';
+        return "StudentEdu{" + "name= " + super.getName() + ", lastName= " + super.getLastName() + ", carrer= " + super.getCarrer() + ", year of income " + super.getYear() + ", uid= " + uid + '}';
     }
 
     

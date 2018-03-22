@@ -11,25 +11,27 @@ import java.io.Serializable;
  *
  * @author byron
  */
-public class Student implements Serializable{
-    
-    private String name, lastName;
+public class Student implements Serializable {
+
+    private String name, lastName, career;
     private int cantStudents, year;
 
-     public Student() {
+    public Student() {
         this.name = "";
         this.lastName = "";
+        this.career = "";
         this.cantStudents = 0;
         this.year = 0;
     }
 
-    public Student(String name, String lastName, int cantStudents, int year) {
+    public Student(String name, String lastName, String career, int cantStudents, int year) {
         this.name = name;
         this.lastName = lastName;
         this.cantStudents = cantStudents;
+        this.career = career;
         this.year = year;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -46,7 +48,6 @@ public class Student implements Serializable{
         this.lastName = lastName;
     }
 
-    
     public int getCantStudents() {
         return cantStudents;
     }
@@ -63,11 +64,17 @@ public class Student implements Serializable{
         this.year = year;
     }
     
+    public String getCarrer() {
+        return career;
+    }
+
+    public void setCarrer(String career) {
+        this.career = career;
+    }
+
     @Override
     public String toString() {
         return "Student{" + "name=" + name + ", lastName=" + lastName + ", cantStudents=" + cantStudents + '}';
     }
 
-  
-    
 }
