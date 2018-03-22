@@ -46,7 +46,7 @@ public class StudentData {
     
      public ArrayList<Student> readStudent() throws IOException, ClassNotFoundException{
         File myFile =new File(this.path);
-        ArrayList<Student> studentList= new ArrayList<Student>();
+        ArrayList<Student> studentList= new ArrayList<>();
         if(myFile.exists()){
             ObjectInputStream ObjectinputStream=new ObjectInputStream(new FileInputStream(myFile));
             Object aux= ObjectinputStream.readObject();
