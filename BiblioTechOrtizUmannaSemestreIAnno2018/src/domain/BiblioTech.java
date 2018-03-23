@@ -12,11 +12,14 @@ import java.util.ArrayList;
  * @author byron
  */
 public class BiblioTech {
+    
+    //atributos
     private ArrayList<Student> students;
     private ArrayList<Book> materialsBooks;
     private ArrayList<Audiovisual> materialsAudiovisual;
     String size;
 
+    //constructores
     public BiblioTech() {
         this.students = new ArrayList<>();
         this.materialsBooks = new ArrayList<>();
@@ -28,7 +31,8 @@ public class BiblioTech {
         this.students = students;
         this.size = size;
     }
-
+    
+    //sets, gets
     public ArrayList<Student> getStudents() {
         return students;
     }
@@ -60,6 +64,7 @@ public class BiblioTech {
         this.size = size;
     }
 
+    //obtiene el tamanno de la lista de estudiantes y lo autocompleta con ceros para formar el uid
     public String studentsSize() {
             if (students.size() < 10) {
                 size = "";

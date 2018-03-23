@@ -11,8 +11,10 @@ package domain;
  */
 public class DigitalBook extends Book{
     
+    //atributo
     private int sizeMB;
 
+    //constructores
     public DigitalBook(int sizeGB) {
         this.sizeMB = sizeGB;
     }
@@ -20,7 +22,8 @@ public class DigitalBook extends Book{
     public DigitalBook() {
         this.sizeMB = 0;
     }
-
+    
+    //sets, gets y toString
     public int getSizeGB() {
         return sizeMB;
     }

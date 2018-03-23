@@ -5,7 +5,11 @@
  */
 package gui;
 
+import data.LoanData;
 import domain.BiblioTech;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *

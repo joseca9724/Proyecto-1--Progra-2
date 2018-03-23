@@ -43,13 +43,23 @@ public class IdentificationWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jLabel1.setText("Enter your university ID");
 
         jButton1.setText("Check");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -58,29 +68,40 @@ public class IdentificationWindow extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("  Enter your university ID");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTextField1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
                 .addComponent(jButton1)
-                .addGap(50, 50, 50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -119,18 +140,18 @@ public class IdentificationWindow extends javax.swing.JFrame {
                 }
             }
             for (int i = 0; i < studentEdus.size(); i++) {
-                if(yes == true){
+                if (yes == true) {
                     break;
-                }else if (studentEdus.get(i).getUid().equalsIgnoreCase(this.uidAux)) {
+                } else if (studentEdus.get(i).getUid().equalsIgnoreCase(this.uidAux)) {
                     JOptionPane.showMessageDialog(null, "Student found correctly");
                     yes = true;
                     break;
                 }
             }
             for (int i = 0; i < studentInfos.size(); i++) {
-                if(yes == true){
+                if (yes == true) {
                     break;
-                }else if (studentInfos.get(i).getUid().equalsIgnoreCase(this.uidAux)) {
+                } else if (studentInfos.get(i).getUid().equalsIgnoreCase(this.uidAux)) {
                     JOptionPane.showMessageDialog(null, "Student found correctly");
                     yes = true;
                     break;
@@ -139,12 +160,13 @@ public class IdentificationWindow extends javax.swing.JFrame {
 
             if (yes == false) {
                 JOptionPane.showMessageDialog(null, "Student not found");
-            } else if(this.bookOrAudio.equals("B")){
+            } else if (this.bookOrAudio.equals("B")) {
                 this.dispose();
-                new LoanBook().setVisible(true);
-            } else if(this.bookOrAudio.equals("A")){
+                SelectSearchMethod searchMethod = new SelectSearchMethod(this.uidAux);
+                searchMethod.setVisible(true);
+            } else if (this.bookOrAudio.equals("A")) {
                 this.dispose();
-                new LoanAudiovisual().setVisible(true);
+                //instancia de ventana de seleccion para busqueda de audiovisuales
             }
         } catch (IOException ex) {
             Logger.getLogger(IdentificationWindow.class.getName()).log(Level.SEVERE, null, ex);
@@ -152,13 +174,17 @@ public class IdentificationWindow extends javax.swing.JFrame {
             Logger.getLogger(IdentificationWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

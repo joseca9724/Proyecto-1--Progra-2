@@ -11,9 +11,11 @@ package domain;
  */
 public class Book extends Material{
     
+    //atributos
     private String isbn, title, author, type;
     private int year;
 
+    //constructores
     public Book(String title, String author, int year, String type) {
         super();
         this.isbn = "(978)9977-";
@@ -32,6 +34,7 @@ public class Book extends Material{
         this.type ="";
     }
 
+    //sets, gets y toString
     public String getIsbn() {
         return isbn;
     }

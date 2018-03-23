@@ -10,8 +10,11 @@ package domain;
  * @author Josec
  */
 public class CD extends Audiovisual{
+    
+    //atributos
     public String type,commentary;
 
+    //Constructores
     public CD(String type, String commentary, boolean use, String Name, int serial) {
         super(use, Name, serial);
         this.type = type;
@@ -24,6 +27,7 @@ public class CD extends Audiovisual{
         this.commentary = "";
     }
 
+    //sets, gets y toString
     public String getType() {
         return type;
     }

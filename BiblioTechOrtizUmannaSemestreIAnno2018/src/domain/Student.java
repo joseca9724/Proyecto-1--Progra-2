@@ -13,9 +13,11 @@ import java.io.Serializable;
  */
 public class Student implements Serializable {
 
+    //atributos
     private String name, lastName, career;
     private int cantStudents, year;
 
+    //costructores
     public Student() {
         this.name = "";
         this.lastName = "";
@@ -32,6 +34,7 @@ public class Student implements Serializable {
         this.year = year;
     }
 
+    //sets, gets y toString
     public String getName() {
         return name;
     }

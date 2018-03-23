@@ -12,9 +12,10 @@ import java.io.Serializable;
  * @author byron
  */
 public class Material implements Serializable {
-    
+    //atributo
     private boolean used;
 
+    //constructores
     public Material(boolean used) {
         this.used = used;
     }
@@ -23,6 +24,7 @@ public class Material implements Serializable {
         this.used = false;
     }
 
+    //sets, gets 
     public boolean isUsed() {
         return used;
     }
