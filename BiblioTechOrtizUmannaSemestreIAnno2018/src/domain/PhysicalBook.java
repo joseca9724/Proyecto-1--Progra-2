@@ -11,8 +11,10 @@ package domain;
  */
 public class PhysicalBook extends Book {
     
+    //atributo
     private int quiantity;
 
+    //constructores
     public PhysicalBook(int quiantity) {
         super();
         this.quiantity = quiantity;
@@ -23,6 +25,7 @@ public class PhysicalBook extends Book {
         this.quiantity = 0;
     }
 
+    //sets, gets y toString
     public int getQuiantity() {
         return quiantity;
     }

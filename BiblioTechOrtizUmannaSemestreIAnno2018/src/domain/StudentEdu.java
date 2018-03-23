@@ -11,34 +11,34 @@ package domain;
  */
 public class StudentEdu extends Student {
 
+    //atributos
     private String uid, size;
 
+    //costructores
     public StudentEdu() {
         super();
         this.uid = "E";
-
     }
 
     public StudentEdu(String carrer) {
         super();
         this.uid = "E";
-
     }
 
-
+//sets, gets y toString
     public void setUid(int anno, String uid) {
         String anno2 = String.valueOf(anno);
         int uid1 = Integer.parseInt(uid);
-         if (uid1 < 10) {
-                size = "";
-                size += "00" + String.valueOf(uid1);
-            } else if (uid1 < 100) {
-                size = "";
-                size += "0" + String.valueOf(uid1);
-            } else if (uid1 < 1000) {
-                size = "";
-                size += String.valueOf(uid1);
-            }
+        if (uid1 < 10) {
+            size = "";
+            size += "00" + String.valueOf(uid1);
+        } else if (uid1 < 100) {
+            size = "";
+            size += "0" + String.valueOf(uid1);
+        } else if (uid1 < 1000) {
+            size = "";
+            size += String.valueOf(uid1);
+        }
         char[] v1 = anno2.toCharArray();
         this.uid = this.uid += String.valueOf(v1[3]);
         this.uid = this.uid += size;
@@ -53,5 +53,4 @@ public class StudentEdu extends Student {
         return "StudentEdu{" + "name= " + super.getName() + ", lastName= " + super.getLastName() + ", carrer= " + super.getCarrer() + ", year of income " + super.getYear() + ", uid= " + uid + '}';
     }
 
-    
 }

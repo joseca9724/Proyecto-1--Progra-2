@@ -11,20 +11,21 @@ package domain;
  */
 public class StudentAgro extends Student{
     
+    //atributos
     private String uid, size;
 
+    //constructores
     public StudentAgro() {
         super();
         this.uid = "A";
-
     }
 
     public StudentAgro(String carrer) {
         super();
         this.uid = "A";
-
     }
 
+    //sets, gets y toString
     public void setUid(int anno, String uid) {
         String anno2 = String.valueOf(anno);
         int uid1 = Integer.parseInt(uid);

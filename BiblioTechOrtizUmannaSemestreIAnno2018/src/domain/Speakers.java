@@ -10,8 +10,10 @@ package domain;
  * @author Josec
  */
 public class Speakers extends Audiovisual{
+    //atributos
     public String type,trademark,commentary;
 
+    //constructores
     public Speakers(String type,String trademark, String commentary, boolean use, String Name, int serial) {
         super(use, Name, serial);
         this.trademark=trademark;
@@ -26,6 +28,7 @@ public class Speakers extends Audiovisual{
         this.commentary = "";
     }
 
+    //sets, gets y toString
     public String getType() {
         return type;
     }

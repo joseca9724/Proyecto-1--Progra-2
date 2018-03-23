@@ -11,39 +11,44 @@ package domain;
  */
 public class Loan {
 
-    private Student student;
-    private Material material;
+    //atributos
+    private String uidStudent;
+    private String serieMaterial;
     private String date, date2;
+    private double multa;
 
+    //costructores
     public Loan() {
-        this.student = null;
-        this.material = null;
+        this.uidStudent = null;
+        this.serieMaterial = null;
         this.date = "";
         this.date2 = "";
+        this.multa = 0;
 
     }
 
-    public Loan(Student student, Material material, String date, String date2) {
-        this.student = student;
-        this.material = material;
+    public Loan(String uidStudent, String serieMaterial, String date, String date2) {
+        this.uidStudent = uidStudent;
+        this.serieMaterial = serieMaterial;
         this.date = date;
         this.date2 = date2;
     }
 
-    public Student getStudent() {
-        return student;
+    //sets, gets y toString
+    public String getUidStudent() {
+        return uidStudent;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setUidStudent(String uidStudent) {
+        this.uidStudent = uidStudent;
     }
 
-    public Material getMaterial() {
-        return material;
+    public String getSerieMaterial() {
+        return serieMaterial;
     }
 
-    public void setMaterial(Material material) {
-        this.material = material;
+    public void setSerieMaterial(String serieMaterial) {
+        this.serieMaterial = serieMaterial;
     }
 
     public String getDate() {
@@ -62,11 +67,21 @@ public class Loan {
         this.date2 = date2;
     }
 
-    @Override
-    public String toString() {
-        return "Loan{" + "student=" + student + ", material=" + material + ", date=" + date + ", date2=" + date2 + '}';
+    public double getMulta() {
+        return multa;
+    }
+
+    public void setMulta(double multa) {
+        this.multa = multa;
     }
     
-    
+      //metodo que responda el tamano de las variables de la clase
+    public int size() {
+        return (int) 10 + 10 + this.date.length() * 2 + this.date2.length() * 2;
+    }
 
+    @Override
+    public String toString() {
+        return "Loan{" + "student=" + uidStudent + ", material=" + serieMaterial + ", date=" + date + ", date2=" + date2 + '}';
+    }
 }

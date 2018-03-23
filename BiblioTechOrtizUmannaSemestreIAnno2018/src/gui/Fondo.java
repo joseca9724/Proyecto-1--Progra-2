@@ -19,10 +19,11 @@ import javax.swing.JPanel;
  * @author byron
  */
 public class Fondo extends JPanel {
-
+    //atributos
     private BufferedImage imagen;
     private Graphics2D g2;
 
+    //constructor
     public Fondo() {
 
         try {
