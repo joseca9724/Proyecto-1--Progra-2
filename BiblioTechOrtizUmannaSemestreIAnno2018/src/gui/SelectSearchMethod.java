@@ -84,7 +84,9 @@ public class SelectSearchMethod extends javax.swing.JFrame {
             LoanBookISBN bookISBN = new LoanBookISBN(this.uid);
             bookISBN.setVisible(true);
         } else if (jRadioButton2.isSelected()) {
-            //ventana de prestamo por titulo
+            this.dispose();
+            LoanBookTitle bookTitle = new LoanBookTitle(this.uid);
+            bookTitle.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

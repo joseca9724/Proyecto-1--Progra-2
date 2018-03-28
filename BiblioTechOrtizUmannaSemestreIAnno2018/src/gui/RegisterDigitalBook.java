@@ -8,14 +8,10 @@ package gui;
 import data.MaterialData;
 import domain.BiblioTech;
 import domain.DigitalBook;
-import domain.PhysicalBook;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.text.MaskFormatter;
 
 /**
  *
