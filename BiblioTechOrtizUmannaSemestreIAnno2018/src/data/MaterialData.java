@@ -9,6 +9,7 @@ import domain.Audiovisual;
 import domain.Book;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -33,7 +34,6 @@ public class MaterialData {
 
     //guarda los libros
     public void saveBook(Book book) throws IOException, ClassNotFoundException {
-        System.out.println("entro");
         File file = new File(this.pathBooks);
         List<Book> bookstList = new ArrayList<Book>();
 
@@ -49,24 +49,46 @@ public class MaterialData {
         output.writeUnshared(bookstList);
         output.close();
     }
-    
+
     //Recupera los libros en una lista
     public ArrayList<Book> readBook() throws IOException, ClassNotFoundException {
         File myFile = new File(this.pathBooks);
-        ArrayList<Book> booktList = new ArrayList<Book>();
+        ArrayList<Book> bookList = new ArrayList<Book>();
         if (myFile.exists()) {
             ObjectInputStream ObjectinputStream = new ObjectInputStream(new FileInputStream(myFile));
             Object aux = ObjectinputStream.readObject();
-            booktList = (ArrayList<Book>) aux;
+            bookList = (ArrayList<Book>) aux;
             ObjectinputStream.close();
         }//If       
 
-        return booktList;
+        return bookList;
     }//obteneObjeto
+
+    public void updateBook(Book book) throws FileNotFoundException, IOException, ClassNotFoundException {
+        File file = new File(this.pathBooks);
+        List<Book> bookstList = new ArrayList<Book>();
+
+        if (file.exists()) {
+//            file.delete();
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file));
+            Object aux = objectInputStream.readObject();
+            bookstList = (List<Book>) aux;
+            objectInputStream.close();
+        }
+
+        for (int i = 0; i < bookstList.size(); i++) {
+            if(bookstList.get(i).getIsbn().equals(book.getIsbn())){
+                bookstList.get(i).setQuiantity(bookstList.get(i).getQuiantity()-1);
+            }
+        }
+//        bookstList.add(book);
+        ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
+        output.writeUnshared(bookstList);
+        output.close();
+    }
 
     //guarda los audiovisuales
     public void saveAudiovisual(Audiovisual audiovisual) throws IOException, ClassNotFoundException {
-        System.out.println("entro");
         File file = new File(this.pathAudio);
         List<Audiovisual> audiovisualList = new ArrayList<Audiovisual>();
 
@@ -82,7 +104,7 @@ public class MaterialData {
         output.writeUnshared(audiovisualList);
         output.close();
     }
-    
+
     //recupera los audiovisuales en una lista
     public ArrayList<Audiovisual> readAudiovisual() throws IOException, ClassNotFoundException {
         File myFile = new File(this.pathAudio);

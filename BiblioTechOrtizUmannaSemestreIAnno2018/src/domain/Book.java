@@ -9,29 +9,32 @@ package domain;
  *
  * @author byron
  */
-public class Book extends Material{
-    
+public class Book extends Material {
+
     //atributos
     private String isbn, title, author, type;
-    private int year;
+    private int year, quantity;
 
     //constructores
-    public Book(String title, String author, int year, String type) {
+    public Book(String title, String author, int year, String type, int quantity) {
         super();
         this.isbn = "(978)9977-";
         this.title = title;
         this.author = author;
         this.year = year;
         this.type = type;
+        this.quantity = quantity;
+
     }
-    
+
     public Book() {
         super();
         this.isbn = "(978)9977-";
         this.title = "";
         this.author = "";
         this.year = 0;
-        this.type ="";
+        this.type = "";
+        this.quantity = 0;
     }
 
     //sets, gets y toString
@@ -75,10 +78,17 @@ public class Book extends Material{
         this.type = type;
     }
     
+    public int getQuiantity() {
+        return quantity;
+    }
+
+    public void setQuiantity(int quiantity) {
+        this.quantity = quiantity;
+    }
+
     @Override
     public String toString() {
         return "Book{" + "isbn=" + isbn + ", title=" + title + ", author=" + author + ", year=" + year + '}';
     }
-    
-    
+
 }

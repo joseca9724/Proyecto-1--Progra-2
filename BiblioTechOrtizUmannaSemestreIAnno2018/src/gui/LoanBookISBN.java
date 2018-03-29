@@ -9,16 +9,16 @@ import data.LoanData;
 import data.MaterialData;
 import domain.Book;
 import domain.Loan;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.FieldPosition;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -37,6 +37,7 @@ public class LoanBookISBN extends javax.swing.JFrame {
     private JComboBox<String> jComboBox1;
     private JTextField jtf;
     ArrayList<Book> list;
+    private Book aux;
 
     private Date date1;
     private DateFormat dateFormat;
@@ -52,7 +53,6 @@ public class LoanBookISBN extends javax.swing.JFrame {
             this.jtf = new JTextField(dateFormat.format(date1));
             this.jtf.setEditable(false);
             list = this.mData.readBook();
-           
 
             for (int i = 0; i < list.size(); i++) {
                 this.jComboBox1.addItem(list.get(i).getIsbn());
@@ -147,18 +147,30 @@ public class LoanBookISBN extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            this.isbn = (String)this.jComboBox1.getSelectedItem();
+            for (int i = 0; i < list.size(); i++) {
+                if(list.get(i).getIsbn().equals((String) this.jComboBox1.getSelectedItem()))
+                aux = list.get(i);
+            }
+
+            if(aux.getQuiantity() == 0){
+                JOptionPane.showMessageDialog(null, "Book not available");
+            } else{
+            this.isbn = (String) this.jComboBox1.getSelectedItem();
             this.date = this.jtf.getText();
             this.date2 = this.jFormattedTextField2.getText();
-            
+
             Loan loan = new Loan(this.uid, this.isbn, this.date, this.date2);
-            
+
             lData = new LoanData();
-            
+
             lData.insertLoan(loan);
-            
+
+            mData.updateBook(aux);
             System.out.println(lData.loanList());
+            }
         } catch (IOException ex) {
+            Logger.getLogger(LoanBookISBN.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(LoanBookISBN.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -170,7 +182,7 @@ public class LoanBookISBN extends javax.swing.JFrame {
 
         this.jComboBox1.setBounds(189, 30, 150, 20);
         this.add(this.jComboBox1);
-        
+
         this.jtf.setBounds(189, 90, 150, 20);
         this.add(this.jtf);
 
