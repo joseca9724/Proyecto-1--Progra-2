@@ -34,7 +34,7 @@ public class DigitalBook extends Book{
     
     @Override
      public String toString() {
-        return "DigitalBook{" + "isbn= " + super.getIsbn() + ", title= " + super.getTitle() + ", author=  " + super.getAuthor() + ", year= " + super.getYear()+ " type= " + super.getType() + " sizeMB= " + sizeMB + '}';
+        return "DigitalBook{" + "isbn= " + super.getIsbn() + ", title= " + super.getTitle() + ", author=  " + super.getAuthor() + ", year= " + super.getYear()+ " type= " + super.getType() + ", quantity= " + super.getQuiantity()+ " sizeMB= " + sizeMB + '}';
     }
 
 }

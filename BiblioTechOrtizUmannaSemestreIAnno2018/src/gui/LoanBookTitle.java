@@ -9,7 +9,6 @@ import data.LoanData;
 import data.MaterialData;
 import domain.Book;
 import domain.Loan;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,29 +19,29 @@ import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
  * @author byron
  */
-public class LoanBookISBN extends javax.swing.JFrame {
+public class LoanBookTitle extends javax.swing.JFrame {
 
     /**
      * Creates new form LoanBookPhy
      */
-    private String uid, isbn, date, date2;
+    private String uid, title, date, date2;
     private MaterialData mData;
     private LoanData lData;
 
     private JComboBox<String> jComboBox1;
     private JTextField jtf;
     ArrayList<Book> list;
-    private Book aux;
 
     private Date date1;
     private DateFormat dateFormat;
 
-    public LoanBookISBN(String uid) {
+    public LoanBookTitle(String uid) {
         try {
             date1 = new Date();
             dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -53,16 +52,19 @@ public class LoanBookISBN extends javax.swing.JFrame {
             this.jtf = new JTextField(dateFormat.format(date1));
             this.jtf.setEditable(false);
             list = this.mData.readBook();
+            this.jComboBox1.setEditable(true);
 
             for (int i = 0; i < list.size(); i++) {
-                this.jComboBox1.addItem(list.get(i).getIsbn());
+                this.jComboBox1.addItem(list.get(i).getTitle());
             }
+
+            AutoCompleteDecorator.decorate(jComboBox1);
             init();
             initComponents();
         } catch (IOException ex) {
-            Logger.getLogger(LoanBookISBN.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoanBookTitle.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoanBookISBN.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoanBookTitle.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -147,31 +149,23 @@ public class LoanBookISBN extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            for (int i = 0; i < list.size(); i++) {
-                if(list.get(i).getIsbn().equals((String) this.jComboBox1.getSelectedItem()))
-                aux = list.get(i);
-            }
+//            if (this.jFormattedTextField2.getText().equals(this.dateFormat)) {
+                this.title = (String) this.jComboBox1.getSelectedItem();
+                this.date = this.jtf.getText();
+                this.date2 = this.jFormattedTextField2.getText();
 
-            if(aux.getQuiantity() == 0){
-                JOptionPane.showMessageDialog(null, "Book not available");
-            } else{
-            this.isbn = (String) this.jComboBox1.getSelectedItem();
-            this.date = this.jtf.getText();
-            this.date2 = this.jFormattedTextField2.getText();
+                Loan loan = new Loan(this.uid, this.title, this.date, this.date2);
 
-            Loan loan = new Loan(this.uid, this.isbn, this.date, this.date2);
+                lData = new LoanData();
 
-            lData = new LoanData();
+                lData.insertLoan(loan);
 
-            lData.insertLoan(loan);
-
-            mData.updateBook(aux);
-            System.out.println(lData.loanList());
-            }
+                System.out.println(lData.loanList());
+//            } else{
+//                JOptionPane.showMessageDialog(null, "Invalid date");
+//            }
         } catch (IOException ex) {
-            Logger.getLogger(LoanBookISBN.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoanBookISBN.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoanBookTitle.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

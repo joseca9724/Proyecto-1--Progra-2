@@ -8,14 +8,10 @@ package gui;
 import data.MaterialData;
 import domain.BiblioTech;
 import domain.DigitalBook;
-import domain.PhysicalBook;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -27,7 +23,7 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
      * Creates new form RegisterDigitalBook
      */
     private String title, author;
-    private int year, sizeMB;
+    private int year, sizeMB, quantity;
 
     private MaterialData mData;
     private BiblioTech biblioTech;
@@ -57,6 +53,8 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        jFormattedTextField3 = new javax.swing.JFormattedTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -79,6 +77,10 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
 
         jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
 
+        jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
+
+        jLabel5.setText("Quantity available");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,21 +91,23 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel1))
-                .addGap(55, 55, 55)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel5))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jFormattedTextField3)
                             .addComponent(jFormattedTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jFormattedTextField2, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(95, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(93, 93, 93)
                 .addComponent(jButton1)
-                .addGap(87, 87, 87))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,9 +128,13 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(27, 27, 27)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -142,11 +150,14 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
                 this.author = this.jTextField2.getText();
                 this.year = Integer.parseInt(this.jFormattedTextField1.getText());
                 this.sizeMB = Integer.parseInt(this.jFormattedTextField2.getText());
+                this.quantity = Integer.parseInt(this.jFormattedTextField3.getText());
 
                 if (this.year < 1950 || this.year > 2018) {
                     JOptionPane.showMessageDialog(null, "Invalid year");
                 } else if (this.sizeMB < 0 || this.sizeMB > 1000) {
                     JOptionPane.showMessageDialog(null, "Invalid amount");
+                } else if (this.quantity < 0) {
+                    JOptionPane.showMessageDialog(null, "Invalid quantity");
                 } else {
 
                     DigitalBook book = new DigitalBook();
@@ -165,6 +176,7 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
                     book.setIsbn(isbnAux);
                     book.setType("Digital");
                     book.setUsed(false);
+                    book.setQuiantity(quantity);
 
                     System.out.println(book.toString());
                     this.mData.saveBook(book);
@@ -176,6 +188,8 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
                     this.jTextField2.setText("");
                     this.jFormattedTextField1.setText("");
                     this.jFormattedTextField2.setText("");
+                    this.jFormattedTextField3.setText("");
+
                 }
 
             } catch (IOException ex) {
@@ -194,10 +208,12 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
+    private javax.swing.JFormattedTextField jFormattedTextField3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables

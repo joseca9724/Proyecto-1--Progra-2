@@ -12,31 +12,32 @@ package domain;
 public class PhysicalBook extends Book {
     
     //atributo
-    private int quiantity;
+    private String state;
 
     //constructores
-    public PhysicalBook(int quiantity) {
+    public PhysicalBook(String state) {
         super();
-        this.quiantity = quiantity;
+        this.state = state;
     }
     
     public PhysicalBook() {
         super();
-        this.quiantity = 0;
+        this.state = "";
     }
 
     //sets, gets y toString
-    public int getQuiantity() {
-        return quiantity;
+    public String getState() {
+        return state;
     }
 
-    public void setQuiantity(int quiantity) {
-        this.quiantity = quiantity;
+    public void setState(String state) {
+        this.state = state;
     }
+    
     
     @Override
      public String toString() {
-        return "PhysicalBook{" + "isbn= " + super.getIsbn() + ", title= " + super.getTitle() + ", author= " + super.getAuthor() + ", year= " + super.getYear()+  " type= " + super.getType() + " quiantity= " + quiantity + '}';
+        return "PhysicalBook{" + "isbn= " + super.getIsbn() + ", title= " + super.getTitle() + ", author= " + super.getAuthor() + ", year= " + super.getYear()+  " type= " + super.getType() + ", quantity= " + super.getQuiantity()+ " state= " + state + '}';
     }
     
 }
