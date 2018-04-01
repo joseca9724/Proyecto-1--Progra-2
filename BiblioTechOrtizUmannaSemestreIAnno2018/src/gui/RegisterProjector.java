@@ -141,7 +141,7 @@ public class RegisterProjector extends javax.swing.JFrame {
             try {
                     Projector projector=new Projector();
                     projector.setName(jTextFieldName.getText());
-                    projector.setSerial((int) (Math.random() * 89999 + 10000));
+                    projector.setSerial((int) (Math.random() * 89999 + 10000)+"");
                     projector.setTrademark(jTextFieldTrademark.getText());
                     projector.setGoodCondition((String)jComboBoxCondition.getSelectedItem());
                     projector.setCommentary(jTextFieldCommentary.getText());

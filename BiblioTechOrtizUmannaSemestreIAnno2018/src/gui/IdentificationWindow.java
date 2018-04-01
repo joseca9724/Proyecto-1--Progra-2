@@ -134,7 +134,7 @@ public class IdentificationWindow extends javax.swing.JFrame {
             boolean yes = false;
             for (int i = 0; i < studentAgros.size(); i++) {
                 if (studentAgros.get(i).getUid().equalsIgnoreCase(this.uidAux)) {
-                    JOptionPane.showMessageDialog(null, "Student found correctly");
+                    JOptionPane.showMessageDialog(rootPane, "Student found correctly");
                     yes = true;
                     break;
                 }
@@ -166,6 +166,8 @@ public class IdentificationWindow extends javax.swing.JFrame {
                 searchMethod.setVisible(true);
             } else if (this.bookOrAudio.equals("A")) {
                 this.dispose();
+                SelectSearchMethodAudiovisual audiovisual=new SelectSearchMethodAudiovisual(this.uidAux);
+                audiovisual.setVisible(true);
                 //instancia de ventana de seleccion para busqueda de audiovisuales
             }
         } catch (IOException ex) {

@@ -16,7 +16,7 @@ public class Laptop extends Audiovisual {
     public String commentary;
     
     //constructor
-    public Laptop(boolean use,String trademark, String goodCondition, String commentary, String Name, int serial) {
+    public Laptop(boolean use,String trademark, String goodCondition, String commentary, String Name, String serial) {
         super(use,Name, serial);
         this.trademark = trademark;
         this.goodCondition = goodCondition;

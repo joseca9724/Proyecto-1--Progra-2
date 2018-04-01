@@ -14,7 +14,7 @@ public class Speakers extends Audiovisual{
     public String type,trademark,commentary;
 
     //constructores
-    public Speakers(String type,String trademark, String commentary, boolean use, String Name, int serial) {
+    public Speakers(String type,String trademark, String commentary, boolean use, String Name, String serial) {
         super(use, Name, serial);
         this.trademark=trademark;
         this.type = type;

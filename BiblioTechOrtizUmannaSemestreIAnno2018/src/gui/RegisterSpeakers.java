@@ -139,7 +139,7 @@ public class RegisterSpeakers extends javax.swing.JFrame {
             try {
                 Speakers speakers=new Speakers();
                 speakers.setName(jTextFieldName.getText());
-                speakers.setSerial((int) (Math.random() * 89999 + 10000));
+                speakers.setSerial((int) (Math.random() * 89999 + 10000)+"");
                 speakers.setTrademark(jTextFieldTrademark.getText());
                 speakers.setType((String)jComboBoxType.getSelectedItem());
                 speakers.setCommentary(jTextFieldCommentary.getText());

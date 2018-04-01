@@ -7,9 +7,8 @@ package gui;
 
 import data.LoanData;
 import data.MaterialData;
-import domain.Book;
+import domain.Audiovisual;
 import domain.Loan;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,24 +24,24 @@ import javax.swing.JTextField;
  *
  * @author byron
  */
-public class LoanBookISBN extends javax.swing.JFrame {
+public class LoanAudiovisualBySerial extends javax.swing.JFrame {
 
     /**
      * Creates new form LoanBookPhy
      */
-    private String uid, isbn, date, date2;
+    private String uid, serial, date, date2;
     private MaterialData mData;
     private LoanData lData;
 
     private JComboBox<String> jComboBox1;
     private JTextField jtf;
-    ArrayList<Book> list;
-    private Book aux;
+    ArrayList<Audiovisual> list;
+    private Audiovisual aux;
 
     private Date date1;
     private DateFormat dateFormat;
 
-    public LoanBookISBN(String uid) {
+    public LoanAudiovisualBySerial(String uid) {
         try {
             date1 = new Date();
             dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -52,21 +51,21 @@ public class LoanBookISBN extends javax.swing.JFrame {
             this.jComboBox1 = new JComboBox<>();
             this.jtf = new JTextField(dateFormat.format(date1));
             this.jtf.setEditable(false);
-            list = this.mData.readBook();
+            list = this.mData.readAudiovisual();
 
             for (int i = 0; i < list.size(); i++) {
-                this.jComboBox1.addItem(list.get(i).getIsbn());
+                this.jComboBox1.addItem(list.get(i).getSerial());
             }
             init();
             initComponents();
-            String[] getYear=dateFormat.format(date1).split("/");
-            int year=Integer.parseInt(getYear[2]);
-            jComboBoxYear.addItem(year+"");
-            jComboBoxYear.addItem(year+1+"");
+            String[] getYear = dateFormat.format(date1).split("/");
+            int year = Integer.parseInt(getYear[2]);
+            jComboBoxYear.addItem(year + "");
+            jComboBoxYear.addItem(year + 1 + "");
         } catch (IOException ex) {
-            Logger.getLogger(LoanBookISBN.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoanAudiovisualBySerial.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoanBookISBN.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoanAudiovisualBySerial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -173,38 +172,38 @@ public class LoanBookISBN extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             for (int i = 0; i < list.size(); i++) {
-                if(list.get(i).getIsbn().equals((String) this.jComboBox1.getSelectedItem()))
-                aux = list.get(i);
+                if (list.get(i).getSerial().equals((String) this.jComboBox1.getSelectedItem())) {
+                    aux = list.get(i);
+                }
             }
 
-            if(aux.getQuiantity() == 0){
-                JOptionPane.showMessageDialog(null, "Book not available");
-            } else{
-            this.isbn = (String) this.jComboBox1.getSelectedItem();
-            this.date = this.jtf.getText();
-            this.date2 = (String) jComboBoxDay.getSelectedItem()
-                     + "/" + (String) jComboBoxMonth.getSelectedItem()
-                     + "/" + (String) jComboBoxYear.getSelectedItem();
+            if (aux.isUsed()) {
+                JOptionPane.showMessageDialog(null, "Audiovisual not available");
+            } else {
+                this.serial = (String) this.jComboBox1.getSelectedItem();
+                this.date = this.jtf.getText();
+                this.date2 = (String) jComboBoxDay.getSelectedItem()
+                        + "/" + (String) jComboBoxMonth.getSelectedItem()
+                        + "/" + (String) jComboBoxYear.getSelectedItem();
 
-            Loan loan = new Loan(this.uid, this.isbn, this.date, this.date2);
+                Loan loan = new Loan(this.uid, this.serial, this.date, this.date2);
 
-            lData = new LoanData();
+                lData = new LoanData();
 
-            lData.insertLoan(loan);
+                lData.insertLoan(loan);
 
-            mData.updateBook(aux);
-            System.out.println(lData.loanList());
-            
-            JOptionPane.showMessageDialog(rootPane, "Successful loan");
-            jComboBoxDay.setSelectedIndex(0);
-            jComboBoxMonth.setSelectedIndex(0);
-            jComboBoxYear.setSelectedIndex(0);
-            jComboBox1.setSelectedIndex(0);
+                mData.updateAudio(aux);
+                System.out.println(lData.loanList());
+                JOptionPane.showMessageDialog(rootPane, "Successful loan");
+                jComboBoxDay.setSelectedIndex(0);
+                jComboBoxMonth.setSelectedIndex(0);
+                jComboBoxYear.setSelectedIndex(0);
+                jComboBox1.setSelectedIndex(0);
             }
         } catch (IOException ex) {
-            Logger.getLogger(LoanBookISBN.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoanAudiovisualBySerial.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoanBookISBN.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoanAudiovisualBySerial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

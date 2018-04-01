@@ -86,6 +86,69 @@ public class MaterialData {
         output.writeUnshared(bookstList);
         output.close();
     }
+    public void updateBookUp(Book book) throws FileNotFoundException, IOException, ClassNotFoundException {
+        File file = new File(this.pathBooks);
+        List<Book> bookstList = new ArrayList<Book>();
+
+        if (file.exists()) {
+//            file.delete();
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file));
+            Object aux = objectInputStream.readObject();
+            bookstList = (List<Book>) aux;
+            objectInputStream.close();
+        }
+
+        for (int i = 0; i < bookstList.size(); i++) {
+            if(bookstList.get(i).getIsbn().equals(book.getIsbn())){
+                bookstList.get(i).setQuiantity(bookstList.get(i).getQuiantity()+1);
+            }
+        }
+//        bookstList.add(book);
+        ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
+        output.writeUnshared(bookstList);
+        output.close();
+    }
+    public void updateAudio(Audiovisual audiovisual) throws FileNotFoundException, IOException, ClassNotFoundException {
+        File file = new File(this.pathAudio);
+        List<Audiovisual> audioList = new ArrayList<Audiovisual>();
+
+        if (file.exists()) {
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file));
+            Object aux = objectInputStream.readObject();
+            audioList = (List<Audiovisual>) aux;
+            objectInputStream.close();
+        }
+
+        for (int i = 0; i < audioList.size(); i++) {
+            if(audioList.get(i).getSerial().equals(audiovisual.getSerial())){
+                audioList.get(i).setUsed(true);
+            }
+        }
+        ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
+        output.writeUnshared(audioList);
+        output.close();
+    }
+    
+    public void updateAudioUsedFalse(Audiovisual audiovisual) throws FileNotFoundException, IOException, ClassNotFoundException {
+        File file = new File(this.pathAudio);
+        List<Audiovisual> audioList = new ArrayList<Audiovisual>();
+
+        if (file.exists()) {
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file));
+            Object aux = objectInputStream.readObject();
+            audioList = (List<Audiovisual>) aux;
+            objectInputStream.close();
+        }
+
+        for (int i = 0; i < audioList.size(); i++) {
+            if(audioList.get(i).getSerial().equals(audiovisual.getSerial())){
+                audioList.get(i).setUsed(false);
+            }
+        }
+        ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
+        output.writeUnshared(audioList);
+        output.close();
+    }
 
     //guarda los audiovisuales
     public void saveAudiovisual(Audiovisual audiovisual) throws IOException, ClassNotFoundException {

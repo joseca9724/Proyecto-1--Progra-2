@@ -12,10 +12,10 @@ package domain;
 public class Audiovisual extends Material{
     //atributos
     public String Name;
-    public int serial;
+    public String serial;
 
     //constructor
-    public Audiovisual(boolean use,String Name, int serial) {
+    public Audiovisual(boolean use,String Name, String serial) {
         super(use);
         this.Name = Name;
         this.serial = serial;
@@ -24,7 +24,7 @@ public class Audiovisual extends Material{
     public Audiovisual() {
         super();
         this.Name = "";
-        this.serial =-1;
+        this.serial ="";
     }
     //sets, gets and toString
 
@@ -36,11 +36,11 @@ public class Audiovisual extends Material{
         this.Name = Name;
     }
 
-    public int getSerial() {
+    public String getSerial() {
         return serial;
     }
 
-    public void setSerial(int serial) {
+    public void setSerial(String serial) {
         this.serial = serial;
     }
 

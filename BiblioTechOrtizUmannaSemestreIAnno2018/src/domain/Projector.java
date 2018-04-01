@@ -16,7 +16,7 @@ public class Projector extends Audiovisual{
     public String commentary;
     
     //constructor
-    public Projector(boolean use,String trademark, String goodCondition, String commentary, String Name, int serial) {
+    public Projector(boolean use,String trademark, String goodCondition, String commentary, String Name, String serial) {
         super(use,Name, serial);
         this.trademark = trademark;
         this.goodCondition = goodCondition;
