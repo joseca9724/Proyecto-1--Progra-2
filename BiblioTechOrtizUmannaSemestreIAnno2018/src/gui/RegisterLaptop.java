@@ -140,7 +140,7 @@ public class RegisterLaptop extends javax.swing.JFrame {
             try {
                     Laptop laptop=new Laptop();
                     laptop.setName(jTextFieldName.getText());
-                    laptop.setSerial((int) (Math.random() * 89999 + 10000));
+                    laptop.setSerial((int) (Math.random() * 89999 + 10000)+"");
                     laptop.setTrademark(jTextFieldTrademark.getText());
                     laptop.setGoodCondition((String)jComboBoxCondition.getSelectedItem());
                     laptop.setCommentary(jTextFieldCommentary.getText());

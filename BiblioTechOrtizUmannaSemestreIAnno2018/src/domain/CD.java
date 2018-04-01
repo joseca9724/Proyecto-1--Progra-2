@@ -15,7 +15,7 @@ public class CD extends Audiovisual{
     public String type,commentary;
 
     //Constructores
-    public CD(String type, String commentary, boolean use, String Name, int serial) {
+    public CD(String type, String commentary, boolean use, String Name, String serial) {
         super(use, Name, serial);
         this.type = type;
         this.commentary = commentary;

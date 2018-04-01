@@ -136,7 +136,7 @@ public class RegisterCD extends javax.swing.JFrame {
             try {
                 CD cd=new CD();
                 cd.setName(jTextFieldName.getText());
-                cd.setSerial((int) (Math.random() * 89999 + 10000));
+                cd.setSerial((int) (Math.random() * 89999 + 10000)+"");
                 cd.setType((String)jComboBoxContent.getSelectedItem());
                 cd.setCommentary(jTextFieldCommentary.getText());
                 cd.setUsed(false);

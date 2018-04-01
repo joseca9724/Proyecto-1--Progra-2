@@ -15,7 +15,7 @@ public class DVD extends Audiovisual{
     public String type,commentary;
 
     //costructores
-    public DVD(String type, String commentary, boolean use, String Name, int serial) {
+    public DVD(String type, String commentary, boolean use, String Name, String serial) {
         super(use, Name, serial);
         this.type = type;
         this.commentary = commentary;

@@ -53,6 +53,12 @@ public class MainWindow extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItemShowAudiovisual = new javax.swing.JMenuItem();
+        jMenuItemShowBook = new javax.swing.JMenuItem();
+        jMenuItemShowLoans = new javax.swing.JMenuItem();
+        jMenuItemShowStudents = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Main window");
@@ -95,7 +101,51 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem4);
 
+        jMenuItem5.setText("Devolutions");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
+
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Registered");
+
+        jMenuItemShowAudiovisual.setText("Audiovisual");
+        jMenuItemShowAudiovisual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemShowAudiovisualActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItemShowAudiovisual);
+
+        jMenuItemShowBook.setText("Books");
+        jMenuItemShowBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemShowBookActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItemShowBook);
+
+        jMenuItemShowLoans.setText("Loans");
+        jMenuItemShowLoans.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemShowLoansActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItemShowLoans);
+
+        jMenuItemShowStudents.setText("Students");
+        jMenuItemShowStudents.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemShowStudentsActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItemShowStudents);
+
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -134,6 +184,37 @@ public class MainWindow extends javax.swing.JFrame {
         identificationWindow.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItemShowAudiovisualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemShowAudiovisualActionPerformed
+        // TODO add your handling code here:
+        ShowAudiovisual showAudiovisual=new ShowAudiovisual();
+        showAudiovisual.setVisible(true);
+    }//GEN-LAST:event_jMenuItemShowAudiovisualActionPerformed
+
+    private void jMenuItemShowBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemShowBookActionPerformed
+        // TODO add your handling code here:
+        ShowBooks showBook=new ShowBooks();
+        showBook.setVisible(true);
+    }//GEN-LAST:event_jMenuItemShowBookActionPerformed
+
+    private void jMenuItemShowLoansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemShowLoansActionPerformed
+
+        ShowLoans showLoan=new ShowLoans();
+        showLoan.setVisible(true);
+    }//GEN-LAST:event_jMenuItemShowLoansActionPerformed
+
+    private void jMenuItemShowStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemShowStudentsActionPerformed
+        // TODO add your handling code here:
+
+        ShowStudents showStudents=new ShowStudents();
+        showStudents.setVisible(true);
+    }//GEN-LAST:event_jMenuItemShowStudentsActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        Devolution devolution = new Devolution();
+        devolution.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -141,10 +222,16 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItemShowAudiovisual;
+    private javax.swing.JMenuItem jMenuItemShowBook;
+    private javax.swing.JMenuItem jMenuItemShowLoans;
+    private javax.swing.JMenuItem jMenuItemShowStudents;
     // End of variables declaration//GEN-END:variables
 }

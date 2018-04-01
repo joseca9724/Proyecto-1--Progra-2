@@ -136,7 +136,7 @@ public class RegisterDVD extends javax.swing.JFrame {
             try {
                 DVD dvd=new DVD();
                 dvd.setName(jTextFieldName.getText());
-                dvd.setSerial((int) (Math.random() * 89999 + 10000));
+                dvd.setSerial((int) (Math.random() * 89999 + 10000)+"");
                 dvd.setType((String)jComboBoxContent.getSelectedItem());
                 dvd.setCommentary(jTextFieldCommentary.getText());
                 dvd.setUsed(false);

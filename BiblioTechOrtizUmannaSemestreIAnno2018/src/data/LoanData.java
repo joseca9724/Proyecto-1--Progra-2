@@ -23,7 +23,7 @@ public class LoanData {
     private String path;//ruta
     File file;
 
-    private ArrayList<Loan> listaDeJugadoresRegistrados;
+    private ArrayList<Loan> RegisteredLoanList;
 
     //Constructor
     public LoanData() throws IOException {
@@ -45,29 +45,43 @@ public class LoanData {
             this.regsQuantity = (int) Math.ceil((double) this.randomAccessFile.length() / (double) this.regSize);
         }//else
     }//start
+    
+    public void close() throws IOException{
+        randomAccessFile.close();
+    }
+    
+    public int fileSize(){
+        return this.regsQuantity;
+    }
+    
 
     //guarda los prestamos
-    private boolean saveLoan(int posicion, Loan loan) throws IOException {
+    public boolean saveLoan(int position, Loan loan) throws IOException {
 
-        if (posicion >= 0 && posicion <= this.regsQuantity) {
-            if (loan.size() > this.regSize) {
-                return false;
+        if (position >= 0 && position <= regsQuantity) {
+            if (loan.tamano() > regSize) {
+                System.err.println("1002 - Record size is out of bounds");
             } else {
-                this.randomAccessFile.seek(posicion * this.regSize);
+                this.randomAccessFile.seek(position * this.regSize);
                 this.randomAccessFile.writeUTF(loan.getUidStudent());
                 this.randomAccessFile.writeUTF(loan.getSerieMaterial());
                 this.randomAccessFile.writeUTF(loan.getDate());
                 this.randomAccessFile.writeUTF(loan.getDate2());
+                this.randomAccessFile.writeBoolean(loan.getReturned());
 
                 return true;
             }
+        } else {
+            System.err.println("1001 - Record position is out of bounds");
         }
         return false;
-    } 
+    }
 
     //asigna la posicion para escribir despues del ultimo elemento del archivo
-    public boolean insertLoan(Loan objeto) throws IOException {
-        return saveLoan(this.regsQuantity, objeto);
+    public void insertLoan(Loan objeto) throws IOException {
+        if(saveLoan(this.regsQuantity, objeto)){
+            regsQuantity++;
+        }
     } // insertLoan
 
     //recupera un prestamo segun el uid y serie que se ingrese
@@ -75,10 +89,10 @@ public class LoanData {
         loanList();
         objeto = new Loan();
 
-        for (int i = 0; i < this.listaDeJugadoresRegistrados.size(); i++) {
-            if (this.listaDeJugadoresRegistrados.get(i).getUidStudent().equalsIgnoreCase(uid)) {
-                if (this.listaDeJugadoresRegistrados.get(i).getSerieMaterial().equalsIgnoreCase(serie)) {
-                    objeto = this.listaDeJugadoresRegistrados.get(i);
+        for (int i = 0; i < this.RegisteredLoanList.size(); i++) {
+            if (this.RegisteredLoanList.get(i).getUidStudent().equalsIgnoreCase(uid)) {
+                if (this.RegisteredLoanList.get(i).getSerieMaterial().equalsIgnoreCase(serie)) {
+                    objeto = this.RegisteredLoanList.get(i);
                 }
             }
         }//for
@@ -86,12 +100,29 @@ public class LoanData {
         return objeto;
 
     }//obtenerJugador
+    
+    public void updatedLoan(String uid, String serie) throws IOException {
+        this.RegisteredLoanList=loanList();
+        Loan loan = new Loan();
+
+        for (int i = 0; i < this.RegisteredLoanList.size(); i++) {
+            if (this.RegisteredLoanList.get(i).getUidStudent().equalsIgnoreCase(uid)) {
+                if (this.RegisteredLoanList.get(i).getSerieMaterial().equalsIgnoreCase(serie)) {
+                    loan = this.RegisteredLoanList.get(i);
+                    System.out.println(loan);
+                    loan.setReturned(true);
+                    saveLoan(i, loan);
+                }
+            }
+        }//for
+    }
+    
 
     //guarda en una lista todos los prestamos
     public ArrayList<Loan> loanList() throws IOException {
-        this.listaDeJugadoresRegistrados = new ArrayList<Loan>();
+        this.RegisteredLoanList = new ArrayList<Loan>();
 
-        for (int i = 0; i < this.regsQuantity; i++) {
+        for (int i = 0; i < fileSize(); i++) {
             this.randomAccessFile.seek(i * this.regSize);
 
             Loan loan = new Loan();
@@ -99,9 +130,10 @@ public class LoanData {
             loan.setSerieMaterial(this.randomAccessFile.readUTF());
             loan.setDate(this.randomAccessFile.readUTF());
             loan.setDate2(this.randomAccessFile.readUTF());
+            loan.setReturned(this.randomAccessFile.readBoolean());
 
-            this.listaDeJugadoresRegistrados.add(loan);
+            this.RegisteredLoanList.add(loan);
         }//for//for
-        return listaDeJugadoresRegistrados;
+        return RegisteredLoanList;
     }//listaJugadores
 }

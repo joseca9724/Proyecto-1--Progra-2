@@ -19,6 +19,8 @@ public class SelectSearchMethod extends javax.swing.JFrame {
     public SelectSearchMethod(String uid) {
         this.uid = uid;
         initComponents();
+        buttonGroup1.add(jRadioButton1);
+        buttonGroup1.add(jRadioButton2);
     }
 
     /**
@@ -84,7 +86,9 @@ public class SelectSearchMethod extends javax.swing.JFrame {
             LoanBookISBN bookISBN = new LoanBookISBN(this.uid);
             bookISBN.setVisible(true);
         } else if (jRadioButton2.isSelected()) {
-            //ventana buscar por titulo
+            this.dispose();
+            LoanBookByTitle loanBookByTitle = new LoanBookByTitle(this.uid);
+            loanBookByTitle.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
