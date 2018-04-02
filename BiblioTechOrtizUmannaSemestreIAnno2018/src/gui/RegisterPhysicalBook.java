@@ -76,9 +76,9 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
             }
         });
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###0"))));
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0"))));
 
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
+        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0"))));
         jFormattedTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextField2ActionPerformed(evt);
@@ -156,9 +156,10 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
                 this.year = Integer.parseInt(this.jFormattedTextField1.getText());
                 this.quantity = Integer.parseInt(this.jFormattedTextField2.getText());
                 this.state = (String) this.jComboBox1.getSelectedItem();
-                
+
                 if (this.year < 1950 || this.year > 2018) {
                     JOptionPane.showMessageDialog(null, "Invalid year");
+                    this.jFormattedTextField1.setText("");
                 } else if (this.quantity < 1) {
                     JOptionPane.showMessageDialog(null, "Invalid amount");
                 } else {
@@ -169,7 +170,7 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
                     book.setYear(year);
                     book.setQuiantity(quantity);
                     book.setState(state);
-                    
+
                     String isbnAux = "";
                     int ran1 = (int) Math.floor(Math.random() * (100 - 10) + 10);
                     int ran2 = (int) Math.floor(Math.random() * (1000 - 100) + 100);

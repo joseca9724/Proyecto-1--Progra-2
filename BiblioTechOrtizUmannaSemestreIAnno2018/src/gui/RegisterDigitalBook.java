@@ -69,15 +69,15 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
 
         jLabel2.setText("Author");
 
-        jLabel3.setText("Year");
+        jLabel3.setText("Year of publication");
 
         jLabel4.setText("Size in MB");
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###0"))));
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0"))));
 
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
+        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0"))));
 
-        jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
+        jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0"))));
 
         jLabel5.setText("Quantity available");
 
@@ -154,6 +154,7 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
 
                 if (this.year < 1950 || this.year > 2018) {
                     JOptionPane.showMessageDialog(null, "Invalid year");
+                    this.jFormattedTextField2.setText("");
                 } else if (this.sizeMB < 0 || this.sizeMB > 1000) {
                     JOptionPane.showMessageDialog(null, "Invalid amount");
                 } else if (this.quantity < 0) {

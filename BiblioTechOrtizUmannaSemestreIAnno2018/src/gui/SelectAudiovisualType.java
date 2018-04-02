@@ -41,7 +41,6 @@ public class SelectAudiovisualType extends javax.swing.JFrame {
         jRadioButtonDVD = new javax.swing.JRadioButton();
         jRadioButtonSpeakers = new javax.swing.JRadioButton();
         jButtonAddAudiovisual = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -55,56 +54,52 @@ public class SelectAudiovisualType extends javax.swing.JFrame {
 
         jRadioButtonSpeakers.setText("Speakers");
 
-        jButtonAddAudiovisual.setText("Add");
+        jButtonAddAudiovisual.setText("Select");
         jButtonAddAudiovisual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddAudiovisualActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Back");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jRadioButtonDVD)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButtonSpeakers))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButtonLaptop)
+                            .addComponent(jRadioButtonDVD))
+                        .addGap(65, 65, 65)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButtonSpeakers)
+                            .addComponent(jRadioButtonProjector)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jButtonAddAudiovisual, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(74, 74, 74)
+                        .addComponent(jButtonAddAudiovisual, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jRadioButtonLaptop)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButtonProjector)
-                        .addGap(18, 18, 18)
+                        .addContainerGap()
                         .addComponent(jRadioButtonCD)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButtonLaptop)
-                    .addComponent(jRadioButtonProjector)
-                    .addComponent(jRadioButtonCD))
+                    .addComponent(jRadioButtonProjector))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButtonDVD)
                     .addComponent(jRadioButtonSpeakers))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAddAudiovisual)
-                    .addComponent(jButton1))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButtonCD)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonAddAudiovisual)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -179,7 +174,6 @@ public class SelectAudiovisualType extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupAudiovisual;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAddAudiovisual;
     private javax.swing.JRadioButton jRadioButtonCD;
     private javax.swing.JRadioButton jRadioButtonDVD;
