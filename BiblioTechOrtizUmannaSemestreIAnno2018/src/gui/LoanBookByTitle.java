@@ -9,6 +9,8 @@ import data.LoanData;
 import data.MaterialData;
 import domain.Book;
 import domain.Loan;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -30,29 +32,43 @@ public class LoanBookByTitle extends javax.swing.JFrame {
     private MaterialData mData;
     private LoanData lData;
     ArrayList<Book> list;
-    
-    private String uid,date, date2;
+
+    private String uid, date, date2;
     private Date date1;
     private DateFormat dateFormat;
     private Book aux;
-    
+
+    private Timer t;
+    private ActionListener actionYes;
+
     public LoanBookByTitle(String uid) {
         try {
             date1 = new Date();
             dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            
+
             this.uid = uid;
             this.mData = new MaterialData();
-            list=this.mData.readBook();
-            System.out.println(mData.readBook());
+            list = this.mData.readBook();
+//            System.out.println(mData.readBook());
             initComponents();
 
             jtfCurrentDate.setText(dateFormat.format(date1));
             jtfCurrentDate.setEditable(false);
-            String[] getYear=dateFormat.format(date1).split("/");
-            int year=Integer.parseInt(getYear[2]);
-            jComboBoxYear.addItem(year+"");
-            jComboBoxYear.addItem(year+1+"");
+            String[] getYear = dateFormat.format(date1).split("/");
+            int year = Integer.parseInt(getYear[2]);
+            jComboBoxYear.addItem(year + "");
+            jComboBoxYear.addItem(year + 1 + "");
+
+            jLabel10.setVisible(false);
+            jLabel11.setVisible(false);
+            jLabel9.setVisible(false);
+
+            this.actionYes = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    jLabel9.setVisible(false);
+                }
+            };
         } catch (IOException ex) {
             Logger.getLogger(LoanBookByTitle.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -87,6 +103,9 @@ public class LoanBookByTitle extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -148,53 +167,65 @@ public class LoanBookByTitle extends javax.swing.JFrame {
 
         jLabel8.setText("Year:");
 
+        jLabel9.setForeground(new java.awt.Color(0, 204, 0));
+        jLabel9.setText("Successful loan");
+
+        jLabel10.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel10.setText("Invalid date");
+
+        jLabel11.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel11.setText("Can't loan this book");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldBookTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldBookTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonSelectBook))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jButtonSelectBook))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBoxDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(24, 24, 24)
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBoxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jComboBoxDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel9))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5)))
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel8)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jComboBoxYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfCurrentDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextFieldLoanBookTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(94, 94, 94)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3))
+                                .addGap(53, 53, 53)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfCurrentDate, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldLoanBookTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,25 +234,26 @@ public class LoanBookByTitle extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldBookTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSelectBook))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                    .addComponent(jButtonSelectBook, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextFieldLoanBookTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldLoanBookTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jtfCurrentDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
+                        .addGap(28, 28, 28)
                         .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(jComboBoxDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,8 +261,13 @@ public class LoanBookByTitle extends javax.swing.JFrame {
                             .addComponent(jComboBoxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
                             .addComponent(jComboBoxYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jLabel9))
+                        .addGap(39, 39, 39))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
@@ -240,10 +277,10 @@ public class LoanBookByTitle extends javax.swing.JFrame {
     private void jTextFieldBookTitleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBookTitleKeyReleased
         try {
             // TODO add your handling code here:
-            list=this.mData.readBook();
+            list = this.mData.readBook();
             String matriz[][] = new String[list.size()][2];
             if (!jTextFieldBookTitle.getText().equals("")) {
-                
+
                 int line = 0;
                 for (int i = 0; i < list.size(); i++) {
                     if (list.get(i).getTitle().toLowerCase().startsWith(jTextFieldBookTitle.getText().toLowerCase())) {
@@ -253,10 +290,10 @@ public class LoanBookByTitle extends javax.swing.JFrame {
                     }
                 }
                 String mShow[][] = new String[line][2];
-                for (int i = 0; i <mShow.length; i++) {
-                    for (int j = 0; j <mShow[i].length; j++) {
-                        mShow[i][j]=matriz[i][j];
-                        
+                for (int i = 0; i < mShow.length; i++) {
+                    for (int j = 0; j < mShow[i].length; j++) {
+                        mShow[i][j] = matriz[i][j];
+
                     }
                 }
                 jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -265,19 +302,16 @@ public class LoanBookByTitle extends javax.swing.JFrame {
                             "Title ", "Quantity"
                         }
                 ));
-                
-                
+
             } else {
-                
+
                 jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                        new Object[][]{
-                            
-                        },
+                        new Object[][]{},
                         new String[]{
                             "Title ", "Quantity"
                         }
                 ));
-                
+
             }
         } catch (IOException ex) {
             Logger.getLogger(LoanBookByTitle.class.getName()).log(Level.SEVERE, null, ex);
@@ -288,7 +322,7 @@ public class LoanBookByTitle extends javax.swing.JFrame {
 
     private void jButtonSelectBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectBookActionPerformed
         // TODO add your handling code here:
-        jTextFieldLoanBookTitle.setText((String)jTable1.getValueAt(jTable1.getSelectedRow(),0));
+        jTextFieldLoanBookTitle.setText((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
     }//GEN-LAST:event_jButtonSelectBookActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -296,43 +330,53 @@ public class LoanBookByTitle extends javax.swing.JFrame {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getTitle().equals(jTextFieldLoanBookTitle.getText())) {
                 aux = list.get(i);
-                System.out.println(aux.toString());
+//                System.out.println(aux.toString());
             }
         }
-        if(aux.getQuiantity() == 0){
-            JOptionPane.showMessageDialog(rootPane,"Error, can't loan this book");
-        }
+        if (aux.getQuiantity() == 0) {
+            jLabel11.setVisible(true);
+            jLabel10.setVisible(false);
 
-        else{
-            System.out.println("entro");
+        } else {
             try {
                 this.date = this.jtfCurrentDate.getText();
                 this.date2 = (String) jComboBoxDay.getSelectedItem()
-                     + "/" + (String) jComboBoxMonth.getSelectedItem()
-                     + "/" + (String) jComboBoxYear.getSelectedItem();
+                        + "/" + (String) jComboBoxMonth.getSelectedItem()
+                        + "/" + (String) jComboBoxYear.getSelectedItem();
 
-                Loan loan = new Loan(this.uid,aux.getIsbn(), this.date, this.date2);
+                Loan loan = new Loan(this.uid, aux.getIsbn(), this.date, this.date2);
 
-                lData = new LoanData();
+                if (loan.days() < 0) {
+                    jLabel10.setVisible(true);
+                    jLabel11.setVisible(false);
 
-                lData.insertLoan(loan);
-                
+                } else {
+                    lData = new LoanData();
 
-                mData.updateBook(aux);
-                System.out.println(lData.loanList());
-                JOptionPane.showMessageDialog(rootPane, "Successful loan");
-                jTextFieldBookTitle.setText("");
-                jTextFieldLoanBookTitle.setText("");
-                jComboBoxDay.setSelectedIndex(0);
-                jComboBoxMonth.setSelectedIndex(0);
-                jComboBoxYear.setSelectedIndex(0);
-                jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                    new Object[][]{
-                    },
-                    new String[]{
-                        "Title ", "Quantity"
-                    }
-            ));
+                    lData.insertLoan(loan);
+
+                    mData.updateBook(aux);
+//                
+                    jLabel10.setVisible(false);
+                    jLabel11.setVisible(false);
+
+                    jLabel9.setVisible(true);
+
+                    t = new Timer(2000, actionYes);
+                    t.start();
+
+                    jTextFieldBookTitle.setText("");
+                    jTextFieldLoanBookTitle.setText("");
+                    jComboBoxDay.setSelectedIndex(0);
+                    jComboBoxMonth.setSelectedIndex(0);
+                    jComboBoxYear.setSelectedIndex(0);
+                    jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                            new Object[][]{},
+                            new String[]{
+                                "Title ", "Quantity"
+                            }
+                    ));
+                }
             } catch (IOException ex) {
                 Logger.getLogger(LoanBookByTitle.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -356,6 +400,8 @@ public class LoanBookByTitle extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxMonth;
     private javax.swing.JComboBox<String> jComboBoxYear;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -363,6 +409,7 @@ public class LoanBookByTitle extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextFieldBookTitle;

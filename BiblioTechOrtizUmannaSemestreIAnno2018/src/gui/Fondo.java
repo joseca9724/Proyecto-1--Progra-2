@@ -27,7 +27,7 @@ public class Fondo extends JPanel {
     public Fondo() {
 
         try {
-            this.setBounds(0, 0, 900, 800);
+            this.setBounds(0, 0, 1200, 800);
             this.setVisible(true);
 
             this.imagen = ImageIO.read(getClass().getResourceAsStream("/assets/assets.JPG"));
@@ -37,7 +37,7 @@ public class Fondo extends JPanel {
     }
 
     public void draw(Graphics2D g2) {
-        g2.drawImage(this.imagen, 1, 1, 810, 600, null);
+        g2.drawImage(this.imagen, 1, 1, 1200, 800, null);
     }
 
     @Override

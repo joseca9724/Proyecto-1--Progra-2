@@ -5,11 +5,7 @@
  */
 package gui;
 
-import data.LoanData;
 import domain.BiblioTech;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -26,15 +22,6 @@ public class MainWindow extends javax.swing.JFrame {
         this.add(new Fondo());
 
         initComponents();
-//        this.biblioTech = new BiblioTech();
-    }
-
-    public MainWindow(int a) {
-
-    }
-
-    public BiblioTech getBiblioTech() {
-        return this.biblioTech;
     }
 
     /**
@@ -49,10 +36,17 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItemShowAudiovisual = new javax.swing.JMenuItem();
@@ -73,33 +67,77 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("Register material");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenu4.setText("Register Material");
+
+        jMenuItem6.setText("Register physical book");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuItem6ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu4.add(jMenuItem6);
+
+        jMenuItem7.setText("Register digital book");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem7);
+
+        jMenuItem8.setText("Register audiovisual");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem8);
+
+        jMenu1.add(jMenu4);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Loans");
 
-        jMenuItem3.setText("Books loan");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem3);
+        jMenu5.setText("Books loan");
 
-        jMenuItem4.setText("Audiovisual loan");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem2.setText("Search by ISBN");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        jMenu5.add(jMenuItem2);
+
+        jMenuItem9.setText("Search by title");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem9);
+
+        jMenu2.add(jMenu5);
+
+        jMenu6.setText("Audiovisual loan");
+
+        jMenuItem10.setText("Search by name");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem10);
+
+        jMenuItem11.setText("Search by serial");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem11);
+
+        jMenu2.add(jMenu6);
 
         jMenuItem5.setText("Devolutions");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -169,43 +207,28 @@ public class MainWindow extends javax.swing.JFrame {
         signInStudent.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        RegisterMaterial registerMaterial = new RegisterMaterial();
-        registerMaterial.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        IdentificationWindow identificationWindow = new IdentificationWindow("B");
-        identificationWindow.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        IdentificationWindow identificationWindow = new IdentificationWindow("A");
-        identificationWindow.setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
     private void jMenuItemShowAudiovisualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemShowAudiovisualActionPerformed
         // TODO add your handling code here:
-        ShowAudiovisual showAudiovisual=new ShowAudiovisual();
+        ShowAudiovisual showAudiovisual = new ShowAudiovisual();
         showAudiovisual.setVisible(true);
     }//GEN-LAST:event_jMenuItemShowAudiovisualActionPerformed
 
     private void jMenuItemShowBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemShowBookActionPerformed
         // TODO add your handling code here:
-        ShowBooks showBook=new ShowBooks();
+        ShowBooks showBook = new ShowBooks();
         showBook.setVisible(true);
     }//GEN-LAST:event_jMenuItemShowBookActionPerformed
 
     private void jMenuItemShowLoansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemShowLoansActionPerformed
 
-        ShowLoans showLoan=new ShowLoans();
+        ShowLoans showLoan = new ShowLoans();
         showLoan.setVisible(true);
     }//GEN-LAST:event_jMenuItemShowLoansActionPerformed
 
     private void jMenuItemShowStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemShowStudentsActionPerformed
         // TODO add your handling code here:
 
-        ShowStudents showStudents=new ShowStudents();
+        ShowStudents showStudents = new ShowStudents();
         showStudents.setVisible(true);
     }//GEN-LAST:event_jMenuItemShowStudentsActionPerformed
 
@@ -215,6 +238,41 @@ public class MainWindow extends javax.swing.JFrame {
         devolution.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        RegisterPhysicalBook registerPhysicalBook = new RegisterPhysicalBook();
+        registerPhysicalBook.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        RegisterDigitalBook registerDigitalBook = new RegisterDigitalBook();
+        registerDigitalBook.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        SelectAudiovisualType audiovisualType = new SelectAudiovisualType();
+        audiovisualType.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        IdentificationWindow identificationWindow = new IdentificationWindow("Bi");
+        identificationWindow.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        IdentificationWindow identificationWindow = new IdentificationWindow("Bt");
+        identificationWindow.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        IdentificationWindow identificationWindow = new IdentificationWindow("An");
+        identificationWindow.setVisible(true);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        IdentificationWindow identificationWindow = new IdentificationWindow("As");
+        identificationWindow.setVisible(true);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -223,12 +281,19 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItemShowAudiovisual;
     private javax.swing.JMenuItem jMenuItemShowBook;
     private javax.swing.JMenuItem jMenuItemShowLoans;

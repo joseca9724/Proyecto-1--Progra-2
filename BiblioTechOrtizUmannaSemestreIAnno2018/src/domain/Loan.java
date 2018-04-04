@@ -118,6 +118,20 @@ public class Loan{
         }
         return penaltyFee;
     }
+    
+    public int days(){
+        int days = 0;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date inicialDate=dateFormat.parse(this.date);
+            Date finalDate=dateFormat.parse(this.date2);
+            days = (int)((finalDate.getTime()-inicialDate.getTime())/86400000);
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(Loan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return days;
+    }
 
     @Override
     public String toString() {

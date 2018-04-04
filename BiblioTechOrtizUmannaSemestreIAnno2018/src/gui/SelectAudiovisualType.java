@@ -23,6 +23,7 @@ public class SelectAudiovisualType extends javax.swing.JFrame {
         buttonGroupAudiovisual.add(jRadioButtonCD);
         buttonGroupAudiovisual.add(jRadioButtonDVD);
         buttonGroupAudiovisual.add(jRadioButtonSpeakers);
+        jLabel1.setVisible(false);
     }
 
     /**
@@ -41,6 +42,7 @@ public class SelectAudiovisualType extends javax.swing.JFrame {
         jRadioButtonDVD = new javax.swing.JRadioButton();
         jRadioButtonSpeakers = new javax.swing.JRadioButton();
         jButtonAddAudiovisual = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -61,14 +63,17 @@ public class SelectAudiovisualType extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel1.setText("No option selected");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButtonLaptop)
                             .addComponent(jRadioButtonDVD))
@@ -76,12 +81,11 @@ public class SelectAudiovisualType extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButtonSpeakers)
                             .addComponent(jRadioButtonProjector)))
+                    .addComponent(jRadioButtonCD)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jButtonAddAudiovisual, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jRadioButtonCD)))
+                        .addComponent(jButtonAddAudiovisual, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -98,7 +102,9 @@ public class SelectAudiovisualType extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jRadioButtonCD)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonAddAudiovisual)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAddAudiovisual)
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -133,7 +139,7 @@ public class SelectAudiovisualType extends javax.swing.JFrame {
             registerProjector.setVisible(true);
         }
         else{
-            JOptionPane.showMessageDialog(null, "No option selected");
+            jLabel1.setVisible(true);
         }
     }//GEN-LAST:event_jButtonAddAudiovisualActionPerformed
 
@@ -175,6 +181,7 @@ public class SelectAudiovisualType extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupAudiovisual;
     private javax.swing.JButton jButtonAddAudiovisual;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jRadioButtonCD;
     private javax.swing.JRadioButton jRadioButtonDVD;
     private javax.swing.JRadioButton jRadioButtonLaptop;
