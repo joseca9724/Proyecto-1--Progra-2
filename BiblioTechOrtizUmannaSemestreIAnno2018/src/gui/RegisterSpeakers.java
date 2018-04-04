@@ -7,12 +7,14 @@ package gui;
 
 import data.MaterialData;
 import domain.BiblioTech;
-import domain.Laptop;
 import domain.Speakers;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -25,10 +27,26 @@ public class RegisterSpeakers extends javax.swing.JFrame {
      */
     private MaterialData mData;
     private BiblioTech biblioTech;
+
+    private Timer t;
+    private ActionListener actionYes;
+
     public RegisterSpeakers() {
         initComponents();
+        jLabel5.setVisible(false);
+        jLabel6.setVisible(false);
+        jLabel7.setVisible(false);
+        jLabel8.setVisible(false);
+
         mData = new MaterialData();
         biblioTech = new BiblioTech();
+
+        this.actionYes = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jLabel8.setVisible(false);
+            }
+        };
     }
 
     /**
@@ -49,6 +67,10 @@ public class RegisterSpeakers extends javax.swing.JFrame {
         jComboBoxType = new javax.swing.JComboBox<>();
         jTextFieldCommentary = new javax.swing.JTextField();
         jButtonAdd = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,6 +97,18 @@ public class RegisterSpeakers extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel5.setText("*");
+
+        jLabel6.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel6.setText("*");
+
+        jLabel7.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel7.setText("*");
+
+        jLabel8.setForeground(new java.awt.Color(0, 204, 0));
+        jLabel8.setText("Registered material");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,27 +123,42 @@ public class RegisterSpeakers extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBoxType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldTrademark)
-                            .addComponent(jTextFieldName)
-                            .addComponent(jTextFieldCommentary)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextFieldTrademark, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                            .addComponent(jTextFieldName, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldCommentary)
+                            .addComponent(jComboBoxType, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(98, Short.MAX_VALUE))
+                        .addGap(73, 73, 73)
+                        .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldTrademark, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldTrademark, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -117,9 +166,12 @@ public class RegisterSpeakers extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextFieldCommentary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCommentary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
-                .addComponent(jButtonAdd)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAdd)
+                    .addComponent(jLabel8))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -132,26 +184,44 @@ public class RegisterSpeakers extends javax.swing.JFrame {
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         // TODO add your handling code here:
-        if (this.jTextFieldName.getText().equals("") || this.jTextFieldTrademark.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Fill all spaces");
+         if (this.jTextFieldName.getText().equals("") && this.jTextFieldTrademark.getText().equals("")&& this.jTextFieldCommentary.getText().equals("")) {
+            this.jLabel5.setVisible(true);
+            this.jLabel6.setVisible(true);
+            this.jLabel7.setVisible(true);
+        } else if (this.jTextFieldName.getText().equals("")) {
+            this.jLabel5.setVisible(true);
+//            this.jLabel7.setVisible(false);
+
+        } else if (this.jTextFieldTrademark.getText().equals("")) {
+            this.jLabel6.setVisible(true);
+//            this.jLabel5.setVisible(false);
+
+        } else if (this.jTextFieldCommentary.getText().equals("")) {
+            this.jLabel7.setVisible(true);
+//            this.jLabel5.setVisible(false);
+
         } else {
-            
             try {
-                Speakers speakers=new Speakers();
+                Speakers speakers = new Speakers();
                 speakers.setName(jTextFieldName.getText());
-                speakers.setSerial((int) (Math.random() * 89999 + 10000)+"");
+                speakers.setSerial((int) (Math.random() * 89999 + 10000) + "");
                 speakers.setTrademark(jTextFieldTrademark.getText());
-                speakers.setType((String)jComboBoxType.getSelectedItem());
+                speakers.setType((String) jComboBoxType.getSelectedItem());
                 speakers.setCommentary(jTextFieldCommentary.getText());
                 speakers.setUsed(false);
+
                 
-                System.out.println(speakers.toString());
-                System.out.println(speakers.getSerial());
                 this.mData.saveAudiovisual(speakers);
                 this.biblioTech.setMaterialsAudio(speakers);
-                
-                System.out.println(mData.readAudiovisual());
-                JOptionPane.showMessageDialog(null, "Registered material");
+
+                jLabel5.setVisible(false);
+                jLabel6.setVisible(false);
+                jLabel7.setVisible(false);
+                jLabel8.setVisible(true);
+
+                t = new Timer(2000, actionYes);
+                t.start();
+
                 this.jTextFieldName.setText("");
                 this.jTextFieldCommentary.setText("");
                 this.jTextFieldTrademark.setText("");
@@ -205,6 +275,10 @@ public class RegisterSpeakers extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextFieldCommentary;
     private javax.swing.JTextField jTextFieldName;
     private javax.swing.JTextField jTextFieldTrademark;

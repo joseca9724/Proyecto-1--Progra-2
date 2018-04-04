@@ -9,10 +9,15 @@ import data.MaterialData;
 import domain.BiblioTech;
 import domain.Book;
 import domain.PhysicalBook;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -29,12 +34,31 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
     private MaterialData mData;
     private BiblioTech biblioTech;
 
+    private Timer t;
+    private ActionListener actionYes;
+
     public RegisterPhysicalBook() {
         super("Register physical book");
         mData = new MaterialData();
         biblioTech = new BiblioTech();
-
         initComponents();
+        
+        jLabel6.setVisible(false);
+        jLabel7.setVisible(false);
+        jLabel8.setVisible(false);
+        jLabel9.setVisible(false);
+        jLabel10.setVisible(false);
+        
+
+        this.actionYes = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jLabel8.setVisible(false);
+            }
+        };
+        
+        validNumbers(jTextField3);
+        validNumbers(jTextField4);
     }
 
     /**
@@ -54,10 +78,15 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -76,44 +105,59 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
             }
         });
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0"))));
-
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0"))));
-        jFormattedTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField2ActionPerformed(evt);
-            }
-        });
-
         jLabel5.setText("State of the book");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Good condition", "Disrepair" }));
+
+        jLabel8.setForeground(new java.awt.Color(0, 204, 0));
+        jLabel8.setText("Registered material");
+
+        jLabel6.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel6.setText("*");
+
+        jLabel7.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel7.setText("*");
+
+        jLabel9.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel9.setText("*");
+
+        jLabel10.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel10.setText("*");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3)
                             .addComponent(jLabel1)
                             .addComponent(jLabel5))
-                        .addGap(25, 25, 25)
+                        .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField2)
-                            .addComponent(jFormattedTextField1)
-                            .addComponent(jFormattedTextField2)
                             .addComponent(jTextField1)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(jButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField3)
+                            .addComponent(jTextField4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel8))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,47 +165,71 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel8))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (this.jTextField1.getText().equals("") || this.jTextField2.getText().equals("") || this.jFormattedTextField1.getText().equals("") || this.jFormattedTextField2.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Fill all spaces");
+        if (this.jTextField1.getText().equals("") && this.jTextField2.getText().equals("") && this.jTextField3.getText().equals("") && this.jTextField4.getText().equals("")) {
+            this.jLabel10.setVisible(true);
+            this.jLabel6.setVisible(true);
+            this.jLabel7.setVisible(true);
+            this.jLabel9.setVisible(true);
+
+        } else if (this.jTextField1.getText().equals("")) {
+            this.jLabel7.setVisible(true);
+
+        } else if (this.jTextField2.getText().equals("")) {
+            this.jLabel6.setVisible(true);
+
+        } else if (this.jTextField3.getText().equals("")) {
+            this.jLabel9.setVisible(true);
+
+        } else if (this.jTextField4.getText().equals("")) {
+            this.jLabel10.setVisible(true);
+
         } else {
             try {
                 this.title = this.jTextField1.getText();
                 this.author = this.jTextField2.getText();
-                this.year = Integer.parseInt(this.jFormattedTextField1.getText());
-                this.quantity = Integer.parseInt(this.jFormattedTextField2.getText());
+                this.year = Integer.parseInt(this.jTextField3.getText());
+                this.quantity = Integer.parseInt(this.jTextField4.getText());
                 this.state = (String) this.jComboBox1.getSelectedItem();
 
                 if (this.year < 1950 || this.year > 2018) {
                     JOptionPane.showMessageDialog(null, "Invalid year");
-                    this.jFormattedTextField1.setText("");
+                    this.jTextField3.setText("");
                 } else if (this.quantity < 1) {
                     JOptionPane.showMessageDialog(null, "Invalid amount");
+                    this.jTextField4.setText("");
                 } else {
 
                     PhysicalBook book = new PhysicalBook();
@@ -186,12 +254,19 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
                     this.mData.saveBook(book);
                     this.biblioTech.setMaterialsBooks(book);
 
-                    System.out.println(mData.readBook());
-                    JOptionPane.showMessageDialog(null, "Registered material");
+                    jLabel10.setVisible(false);
+                    jLabel6.setVisible(false);
+                    jLabel7.setVisible(false);
+                    jLabel8.setVisible(true);
+                    jLabel9.setVisible(false);
+
+                    t = new Timer(2000, actionYes);
+                    t.start();
+
                     this.jTextField1.setText("");
                     this.jTextField2.setText("");
-                    this.jFormattedTextField1.setText("");
-                    this.jFormattedTextField2.setText("");
+                    this.jTextField3.setText("");
+                    this.jTextField4.setText("");
                 }
             } catch (IOException ex) {
                 Logger.getLogger(RegisterPhysicalBook.class.getName()).log(Level.SEVERE, null, ex);
@@ -202,10 +277,17 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jFormattedTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField2ActionPerformed
-
+    public void validNumbers(javax.swing.JTextField a) {
+        a.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    e.consume();
+                }
+            }
+        });
+    }
     /**
      * @param args the command line arguments
      */
@@ -214,14 +296,19 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }

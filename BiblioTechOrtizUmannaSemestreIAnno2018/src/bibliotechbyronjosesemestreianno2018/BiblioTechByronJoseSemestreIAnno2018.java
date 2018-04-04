@@ -18,7 +18,8 @@ public class BiblioTechByronJoseSemestreIAnno2018 {
      */
     public static void main(String[] args) {
         MainWindow mainWindow = new MainWindow();
-        mainWindow.setSize(815, 653);
+        mainWindow.setSize(1200, 800);
+        mainWindow.setResizable(false);
         mainWindow.setVisible(true);
     }
     

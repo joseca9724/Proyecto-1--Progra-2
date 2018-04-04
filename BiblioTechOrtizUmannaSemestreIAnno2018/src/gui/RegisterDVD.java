@@ -7,12 +7,14 @@ package gui;
 
 import data.MaterialData;
 import domain.BiblioTech;
-import domain.CD;
 import domain.DVD;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -25,10 +27,24 @@ public class RegisterDVD extends javax.swing.JFrame {
      */
     private MaterialData mData;
     private BiblioTech biblioTech;
+    
+    private Timer t;
+    private ActionListener actionYes;
+    
     public RegisterDVD() {
         initComponents();
+        jLabel5.setVisible(false);
+        jLabel6.setVisible(false);
+        jLabel8.setVisible(false);
         mData = new MaterialData();
         biblioTech = new BiblioTech();
+
+        this.actionYes = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jLabel8.setVisible(false);
+            }
+        };
     }
 
     /**
@@ -40,7 +56,6 @@ public class RegisterDVD extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonBack = new javax.swing.JButton();
         jComboBoxContent = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -48,10 +63,11 @@ public class RegisterDVD extends javax.swing.JFrame {
         jTextFieldName = new javax.swing.JTextField();
         jTextFieldCommentary = new javax.swing.JTextField();
         jButtonAdd = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jButtonBack.setText("Back");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jComboBoxContent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Videos", "Imagenes", "Materia" }));
 
@@ -74,12 +90,21 @@ public class RegisterDVD extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel5.setText("*");
+
+        jLabel6.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel6.setText("*");
+
+        jLabel8.setForeground(new java.awt.Color(0, 204, 0));
+        jLabel8.setText("Registered material");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,12 +117,14 @@ public class RegisterDVD extends javax.swing.JFrame {
                             .addComponent(jTextFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                             .addComponent(jTextFieldCommentary)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
+                        .addGap(95, 95, 95)
                         .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                        .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,7 +132,8 @@ public class RegisterDVD extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -113,11 +141,12 @@ public class RegisterDVD extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextFieldCommentary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCommentary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonBack)
-                    .addComponent(jButtonAdd))
+                    .addComponent(jButtonAdd)
+                    .addComponent(jLabel8))
                 .addGap(43, 43, 43))
         );
 
@@ -130,8 +159,17 @@ public class RegisterDVD extends javax.swing.JFrame {
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         // TODO add your handling code here:
-        if (this.jTextFieldName.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Error, Fill name space");
+        if (this.jTextFieldName.getText().equals("")&& this.jTextFieldCommentary.getText().equals("")) {
+            this.jLabel5.setVisible(true);
+            this.jLabel6.setVisible(true);
+        } else if (this.jTextFieldName.getText().equals("")) {
+            this.jLabel5.setVisible(true);
+//            this.jLabel7.setVisible(false);
+
+        } else if (this.jTextFieldCommentary.getText().equals("")) {
+            this.jLabel6.setVisible(true);
+//            this.jLabel5.setVisible(false);
+
         } else {
             try {
                 DVD dvd=new DVD();
@@ -141,13 +179,16 @@ public class RegisterDVD extends javax.swing.JFrame {
                 dvd.setCommentary(jTextFieldCommentary.getText());
                 dvd.setUsed(false);
                 
-                System.out.println(dvd.toString());
-                System.out.println(dvd.getSerial());
                 this.mData.saveAudiovisual(dvd);
                 this.biblioTech.setMaterialsAudio(dvd);
                 
-                System.out.println(mData.readAudiovisual());
-                JOptionPane.showMessageDialog(null, "Registered material");
+                jLabel5.setVisible(false);
+                jLabel6.setVisible(false);
+                jLabel8.setVisible(true);
+
+                t = new Timer(2000, actionYes);
+                t.start();
+                
                 this.jTextFieldName.setText("");
                 this.jTextFieldCommentary.setText("");
             } catch (IOException ex) {
@@ -196,11 +237,13 @@ public class RegisterDVD extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdd;
-    private javax.swing.JButton jButtonBack;
     private javax.swing.JComboBox<String> jComboBoxContent;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextFieldCommentary;
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables

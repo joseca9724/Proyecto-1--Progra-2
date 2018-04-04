@@ -25,13 +25,13 @@ public class IdentificationWindow extends javax.swing.JFrame {
     /**
      * Creates new form IdentificationWindow
      */
-    private String uidAux, bookOrAudio;
+    private String uidAux, Type;
 
     StudentData data;
 
-    public IdentificationWindow(String bookOrAudio) {
+    public IdentificationWindow(String type) {
         initComponents();
-        this.bookOrAudio = bookOrAudio;
+        this.Type = type;
     }
 
     /**
@@ -134,7 +134,7 @@ public class IdentificationWindow extends javax.swing.JFrame {
             boolean yes = false;
             for (int i = 0; i < studentAgros.size(); i++) {
                 if (studentAgros.get(i).getUid().equalsIgnoreCase(this.uidAux)) {
-                    JOptionPane.showMessageDialog(rootPane, "Student found correctly");
+                    JOptionPane.showMessageDialog(null, "Student found correctly: \n" + studentAgros.get(i).getName() + " " + studentAgros.get(i).getLastName());
                     yes = true;
                     break;
                 }
@@ -143,7 +143,7 @@ public class IdentificationWindow extends javax.swing.JFrame {
                 if (yes == true) {
                     break;
                 } else if (studentEdus.get(i).getUid().equalsIgnoreCase(this.uidAux)) {
-                    JOptionPane.showMessageDialog(null, "Student found correctly");
+                    JOptionPane.showMessageDialog(null, "Student found correctly: \n" + studentEdus.get(i).getName() + " " + studentEdus.get(i).getLastName());
                     yes = true;
                     break;
                 }
@@ -152,7 +152,7 @@ public class IdentificationWindow extends javax.swing.JFrame {
                 if (yes == true) {
                     break;
                 } else if (studentInfos.get(i).getUid().equalsIgnoreCase(this.uidAux)) {
-                    JOptionPane.showMessageDialog(null, "Student found correctly");
+                    JOptionPane.showMessageDialog(null, "Student found correctly: \n" + studentInfos.get(i).getName() + " " + studentInfos.get(i).getLastName());
                     yes = true;
                     break;
                 }
@@ -160,15 +160,22 @@ public class IdentificationWindow extends javax.swing.JFrame {
 
             if (yes == false) {
                 JOptionPane.showMessageDialog(null, "Student not found");
-            } else if (this.bookOrAudio.equals("B")) {
+            } else if (this.Type.equals("Bi")) {
                 this.dispose();
-                SelectSearchMethod searchMethod = new SelectSearchMethod(this.uidAux);
-                searchMethod.setVisible(true);
-            } else if (this.bookOrAudio.equals("A")) {
+                LoanBookByISBN bookISBN = new LoanBookByISBN(this.uidAux);
+                bookISBN.setVisible(true);
+            } else if (this.Type.equals("Bt")) {
                 this.dispose();
-                SelectSearchMethodAudiovisual audiovisual=new SelectSearchMethodAudiovisual(this.uidAux);
-                audiovisual.setVisible(true);
-                //instancia de ventana de seleccion para busqueda de audiovisuales
+                LoanBookByTitle bookISBN = new LoanBookByTitle(this.uidAux);
+                bookISBN.setVisible(true);
+            } else if (this.Type.equals("As")) {
+                this.dispose();
+                LoanAudiovisualBySerial bySerial = new LoanAudiovisualBySerial(this.uidAux);
+                bySerial.setVisible(true);
+            } else if (this.Type.equals("An")) {
+                this.dispose();
+                LoanAudiovisualByName byName = new LoanAudiovisualByName(this.uidAux);
+                byName.setVisible(true);
             }
         } catch (IOException ex) {
             Logger.getLogger(IdentificationWindow.class.getName()).log(Level.SEVERE, null, ex);

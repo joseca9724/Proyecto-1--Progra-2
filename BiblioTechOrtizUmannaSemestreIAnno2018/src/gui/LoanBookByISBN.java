@@ -7,7 +7,7 @@ package gui;
 
 import data.LoanData;
 import data.MaterialData;
-import domain.Audiovisual;
+import domain.Book;
 import domain.Loan;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,34 +25,35 @@ import javax.swing.Timer;
  *
  * @author Josec
  */
-public class LoanAudiovisualBySerial extends javax.swing.JFrame {
+public class LoanBookByISBN extends javax.swing.JFrame {
 
     /**
      * Creates new form LoanBookByTitle
      */
     private MaterialData mData;
     private LoanData lData;
-    ArrayList<Audiovisual> list;
+    ArrayList<Book> list;
 
     private String uid, date, date2;
     private Date date1;
     private DateFormat dateFormat;
-    private Audiovisual aux;
+    private Book aux;
 
     private Timer t;
     private ActionListener actionYes;
 
-    public LoanAudiovisualBySerial(String uid) {
+    public LoanBookByISBN(String uid) {
         try {
             date1 = new Date();
             dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
             this.uid = uid;
             this.mData = new MaterialData();
-            list = this.mData.readAudiovisual();
-//            System.out.println(mData.readAudiovisual());
+            list = this.mData.readBook();
+//            System.out.println(mData.readBook());
             initComponents();
 
+            this.jTextFieldBookISBN.setText("(978)9977-");
             jtfCurrentDate.setText(dateFormat.format(date1));
             jtfCurrentDate.setEditable(false);
             String[] getYear = dateFormat.format(date1).split("/");
@@ -71,9 +72,9 @@ public class LoanAudiovisualBySerial extends javax.swing.JFrame {
                 }
             };
         } catch (IOException ex) {
-            Logger.getLogger(LoanAudiovisualBySerial.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoanBookByISBN.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoanAudiovisualBySerial.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoanBookByISBN.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -87,14 +88,14 @@ public class LoanAudiovisualBySerial extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldAudiovisualName = new javax.swing.JTextField();
+        jTextFieldBookISBN = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButtonSelectAudiovisual = new javax.swing.JButton();
+        jButtonSelectBook = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldLoanName = new javax.swing.JTextField();
+        jTextFieldLoanBookISBN = new javax.swing.JTextField();
         jtfCurrentDate = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -110,11 +111,11 @@ public class LoanAudiovisualBySerial extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Audiovisual Serial:");
+        jLabel1.setText("Book ISBN:");
 
-        jTextFieldAudiovisualName.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldBookISBN.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldAudiovisualNameKeyReleased(evt);
+                jTextFieldBookISBNKeyReleased(evt);
             }
         });
 
@@ -123,36 +124,35 @@ public class LoanAudiovisualBySerial extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Serial ", "Status"
+                "ISBN ", "Quantity"
             }
         ));
-        jTable1.setToolTipText("");
         jScrollPane1.setViewportView(jTable1);
 
-        jButtonSelectAudiovisual.setText("Select Audiovisual");
-        jButtonSelectAudiovisual.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSelectBook.setText("Select Book");
+        jButtonSelectBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSelectAudiovisualActionPerformed(evt);
+                jButtonSelectBookActionPerformed(evt);
             }
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Loan Audiovisual");
+        jLabel2.setText("Loan Book ");
 
-        jLabel3.setText("Audiovisual Serial:");
+        jLabel3.setText("Book ISBN:");
 
         jLabel4.setText("Current Date:");
 
-        jTextFieldLoanName.setEditable(false);
-        jTextFieldLoanName.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldLoanBookISBN.setEditable(false);
+        jTextFieldLoanBookISBN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldLoanNameActionPerformed(evt);
+                jTextFieldLoanBookISBNActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Enter return date:");
 
-        jButton1.setText("Loan Audiovisual");
+        jButton1.setText("Loan Book");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -160,11 +160,6 @@ public class LoanAudiovisualBySerial extends javax.swing.JFrame {
         });
 
         jComboBoxDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        jComboBoxDay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxDayActionPerformed(evt);
-            }
-        });
 
         jComboBoxMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 
@@ -181,62 +176,69 @@ public class LoanAudiovisualBySerial extends javax.swing.JFrame {
         jLabel10.setText("Invalid date");
 
         jLabel11.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel11.setText("Can't loan this audiovisual");
+        jLabel11.setText("Can't loan this book");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldAudiovisualName, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonSelectAudiovisual))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(7, 7, 7)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel4)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(jtfCurrentDate))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel3)
+                                                    .addGap(32, 32, 32)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel11)
+                                                        .addComponent(jTextFieldLoanBookISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(jLabel5))
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel9))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBoxDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel7)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jComboBoxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(24, 24, 24)
-                                                .addComponent(jLabel8)
+                                                .addComponent(jComboBoxDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jComboBoxYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jtfCurrentDate, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                                        .addComponent(jTextFieldLoanName)))))))
-                .addGap(0, 51, Short.MAX_VALUE))
+                                                .addComponent(jLabel7)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jComboBoxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jComboBoxYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldBookISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonSelectBook, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(300, 300, 300))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,25 +246,26 @@ public class LoanAudiovisualBySerial extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextFieldAudiovisualName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSelectAudiovisual))
-                .addGap(20, 20, 20)
+                    .addComponent(jTextFieldBookISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSelectBook))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextFieldLoanName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
+                            .addComponent(jTextFieldLoanBookISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jtfCurrentDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
+                        .addGap(28, 28, 28)
                         .addComponent(jLabel5)
-                        .addGap(7, 7, 7)
+                        .addGap(10, 10, 10)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -272,34 +275,28 @@ public class LoanAudiovisualBySerial extends javax.swing.JFrame {
                             .addComponent(jComboBoxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
                             .addComponent(jComboBoxYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
-                            .addComponent(jLabel9))
-                        .addGap(0, 52, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                            .addComponent(jLabel9))))
+                .addGap(12, 12, 12))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldAudiovisualNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldAudiovisualNameKeyReleased
+    private void jTextFieldBookISBNKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBookISBNKeyReleased
         try {
             // TODO add your handling code here:
-            list = this.mData.readAudiovisual();
+            list = this.mData.readBook();
             String matriz[][] = new String[list.size()][2];
-            if (!jTextFieldAudiovisualName.getText().equals("")) {
+            if (!jTextFieldBookISBN.getText().equals("")) {
 
                 int line = 0;
                 for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getSerial().toLowerCase().startsWith(jTextFieldAudiovisualName.getText().toLowerCase())) {
-                        matriz[line][0] = list.get(i).getSerial();
-                        if (list.get(i).isUsed()) {
-                            matriz[line][1] = "On loan";
-                        } else {
-                            matriz[line][1] = "Available";
-                        }
+                    if (list.get(i).getIsbn().toLowerCase().startsWith(jTextFieldBookISBN.getText().toLowerCase())) {
+                        matriz[line][0] = list.get(i).getIsbn();
+                        matriz[line][1] = list.get(i).getQuiantity() + "";
                         line++;
                     }
                 }
@@ -313,7 +310,7 @@ public class LoanAudiovisualBySerial extends javax.swing.JFrame {
                 jTable1.setModel(new javax.swing.table.DefaultTableModel(
                         mShow,
                         new String[]{
-                            "Serial ", "Status"
+                            "ISBN ", "Quantity"
                         }
                 ));
 
@@ -322,52 +319,52 @@ public class LoanAudiovisualBySerial extends javax.swing.JFrame {
                 jTable1.setModel(new javax.swing.table.DefaultTableModel(
                         new Object[][]{},
                         new String[]{
-                            "Serial ", "Status"
+                            "ISBN ", "Quantity"
                         }
                 ));
 
             }
         } catch (IOException ex) {
-            Logger.getLogger(LoanAudiovisualBySerial.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoanBookByISBN.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoanAudiovisualBySerial.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoanBookByISBN.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jTextFieldAudiovisualNameKeyReleased
+    }//GEN-LAST:event_jTextFieldBookISBNKeyReleased
 
-    private void jButtonSelectAudiovisualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectAudiovisualActionPerformed
+    private void jButtonSelectBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectBookActionPerformed
         // TODO add your handling code here:
-        jTextFieldLoanName.setText((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-    }//GEN-LAST:event_jButtonSelectAudiovisualActionPerformed
+        jTextFieldLoanBookISBN.setText((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+    }//GEN-LAST:event_jButtonSelectBookActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getSerial().equals(jTextFieldLoanName.getText())) {
+            if (list.get(i).getIsbn().equals(jTextFieldLoanBookISBN.getText())) {
                 aux = list.get(i);
 //                System.out.println(aux.toString());
             }
         }
-        if (aux.isUsed()) {
+        if (aux.getQuiantity() == 0) {
             jLabel11.setVisible(true);
             jLabel10.setVisible(false);
         } else {
-//            System.out.println("entro");
             try {
                 this.date = this.jtfCurrentDate.getText();
                 this.date2 = (String) jComboBoxDay.getSelectedItem()
                         + "/" + (String) jComboBoxMonth.getSelectedItem()
                         + "/" + (String) jComboBoxYear.getSelectedItem();
 
-                Loan loan = new Loan(this.uid, aux.getSerial(), this.date, this.date2);
-//                System.out.println(loan);
+                Loan loan = new Loan(this.uid, aux.getIsbn(), this.date, this.date2);
+
                 if (loan.days() < 0) {
                     jLabel10.setVisible(true);
                     jLabel11.setVisible(false);
                 } else {
                     lData = new LoanData();
+
                     lData.insertLoan(loan);
 
-                    mData.updateAudio(aux);
+                    mData.updateBook(aux);
 
                     jLabel10.setVisible(false);
                     jLabel11.setVisible(false);
@@ -376,34 +373,31 @@ public class LoanAudiovisualBySerial extends javax.swing.JFrame {
 
                     t = new Timer(2000, actionYes);
                     t.start();
-
-                    jTextFieldAudiovisualName.setText("");
-                    jTextFieldLoanName.setText("");
+                    
+                    jTextFieldBookISBN.setText("");
+                    jTextFieldLoanBookISBN.setText("");
                     jComboBoxDay.setSelectedIndex(0);
                     jComboBoxMonth.setSelectedIndex(0);
                     jComboBoxYear.setSelectedIndex(0);
                     jTable1.setModel(new javax.swing.table.DefaultTableModel(
                             new Object[][]{},
                             new String[]{
-                                "Serial ", "Status"
+                                "ISBN ", "Quantity"
                             }
                     ));
                 }
             } catch (IOException ex) {
-                Logger.getLogger(LoanAudiovisualBySerial.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LoanBookByISBN.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(LoanAudiovisualBySerial.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LoanBookByISBN.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextFieldLoanNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLoanNameActionPerformed
+    private void jTextFieldLoanBookISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLoanBookISBNActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldLoanNameActionPerformed
-
-    private void jComboBoxDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDayActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxDayActionPerformed
+    }//GEN-LAST:event_jTextFieldLoanBookISBNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -411,7 +405,7 @@ public class LoanAudiovisualBySerial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButtonSelectAudiovisual;
+    private javax.swing.JButton jButtonSelectBook;
     private javax.swing.JComboBox<String> jComboBoxDay;
     private javax.swing.JComboBox<String> jComboBoxMonth;
     private javax.swing.JComboBox<String> jComboBoxYear;
@@ -428,8 +422,8 @@ public class LoanAudiovisualBySerial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextFieldAudiovisualName;
-    private javax.swing.JTextField jTextFieldLoanName;
+    private javax.swing.JTextField jTextFieldBookISBN;
+    private javax.swing.JTextField jTextFieldLoanBookISBN;
     private javax.swing.JTextField jtfCurrentDate;
     // End of variables declaration//GEN-END:variables
 }

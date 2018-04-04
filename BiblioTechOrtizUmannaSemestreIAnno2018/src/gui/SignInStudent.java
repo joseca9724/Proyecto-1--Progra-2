@@ -11,12 +11,15 @@ import domain.Student;
 import domain.StudentAgro;
 import domain.StudentEdu;
 import domain.StudentInfo;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.Timer;
 
 /**
  *
@@ -31,6 +34,8 @@ public class SignInStudent extends javax.swing.JFrame {
     private int year;
     public BiblioTech biblioTech;
     private StudentData studentData;
+    private Timer t;
+    private ActionListener actionYes;
 
     public SignInStudent() {
         super("Sign in");
@@ -38,6 +43,17 @@ public class SignInStudent extends javax.swing.JFrame {
         this.setLayout(null);
         this.biblioTech = new BiblioTech();
         this.studentData = new StudentData();
+        this.jLabel5.setVisible(false);
+        this.jLabel6.setVisible(false);
+        this.jLabel7.setVisible(false);
+
+        this.actionYes = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jLabel6.setVisible(false);
+            }
+        };
+
         this.pack();
     }
 
@@ -59,6 +75,9 @@ public class SignInStudent extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(285, 265));
@@ -88,6 +107,16 @@ public class SignInStudent extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setBackground(new java.awt.Color(255, 51, 51));
+        jLabel5.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel5.setText("*");
+
+        jLabel6.setForeground(new java.awt.Color(0, 204, 0));
+        jLabel6.setText("Created account");
+
+        jLabel7.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel7.setText("*");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,22 +126,27 @@ public class SignInStudent extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(60, 60, 60)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
+                        .addGap(74, 74, 74)
                         .addComponent(jButton1)))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBox2, 0, 159, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jTextField1))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,11 +154,13 @@ public class SignInStudent extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -133,8 +169,10 @@ public class SignInStudent extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addComponent(jButton1)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -147,9 +185,17 @@ public class SignInStudent extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ArrayList<Student> list = new ArrayList<>();
-        if (this.jTextField1.getText().equals("") || this.jTextField2.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Fill all spaces");
-        } else {
+        if (this.jTextField1.getText().equals("") && this.jTextField2.getText().equals("")) {
+            this.jLabel5.setVisible(true);
+            this.jLabel7.setVisible(true);
+        } else if (this.jTextField1.getText().equals("")) {
+            this.jLabel5.setVisible(true);
+//            this.jLabel7.setVisible(false);
+
+        } else if (this.jTextField2.getText().equals("")) {
+            this.jLabel7.setVisible(true);
+//            this.jLabel5.setVisible(false);
+        } else  {
             this.name = this.jTextField1.getText();
             this.lastName = this.jTextField2.getText();
             this.year = Integer.parseInt((String) this.jComboBox1.getSelectedItem());
@@ -212,7 +258,14 @@ public class SignInStudent extends javax.swing.JFrame {
                 }
 
             }
-            JOptionPane.showMessageDialog(null, "Created account");
+
+            this.jLabel5.setVisible(false);
+            this.jLabel7.setVisible(false);
+            this.jLabel6.setVisible(true);
+
+            t = new Timer(2000, actionYes);
+            t.start();
+
             this.jTextField1.setText("");
             this.jTextField2.setText("");
         }
@@ -229,6 +282,9 @@ public class SignInStudent extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables

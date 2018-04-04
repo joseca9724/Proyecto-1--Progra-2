@@ -6,14 +6,14 @@
 package gui;
 
 import data.MaterialData;
-import domain.Audiovisual;
 import domain.BiblioTech;
-import domain.Laptop;
 import domain.Projector;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -26,11 +26,26 @@ public class RegisterProjector extends javax.swing.JFrame {
      */
     private MaterialData mData;
     private BiblioTech biblioTech;
-    
+
+    private Timer t;
+    private ActionListener actionYes;
+
     public RegisterProjector() {
         initComponents();
+        jLabel5.setVisible(false);
+        jLabel6.setVisible(false);
+        jLabel7.setVisible(false);
+        jLabel8.setVisible(false);
         mData = new MaterialData();
         biblioTech = new BiblioTech();
+
+        this.actionYes = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jLabel8.setVisible(false);
+            }
+        };
+
     }
 
     /**
@@ -51,6 +66,10 @@ public class RegisterProjector extends javax.swing.JFrame {
         jTextFieldCommentary = new javax.swing.JTextField();
         jComboBoxCondition = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Register Projector\n");
@@ -78,29 +97,48 @@ public class RegisterProjector extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setForeground(new java.awt.Color(0, 204, 0));
+        jLabel8.setText("Registered material");
+
+        jLabel5.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel5.setText("*");
+
+        jLabel6.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel6.setText("*");
+
+        jLabel7.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel7.setText("*");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                        .addComponent(jTextFieldTrademark))
-                    .addComponent(jComboBoxCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldCommentary, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBoxCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                            .addComponent(jTextFieldTrademark)
+                            .addComponent(jTextFieldCommentary))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(138, 138, 138))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,11 +146,13 @@ public class RegisterProjector extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldTrademark, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldTrademark, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -120,9 +160,12 @@ public class RegisterProjector extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextFieldCommentary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCommentary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel8))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -135,29 +178,47 @@ public class RegisterProjector extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (this.jTextFieldName.getText().equals("") || this.jTextFieldTrademark.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Fill all spaces");
+        if (this.jTextFieldName.getText().equals("") && this.jTextFieldTrademark.getText().equals("")&& this.jTextFieldCommentary.getText().equals("")) {
+            this.jLabel5.setVisible(true);
+            this.jLabel6.setVisible(true);
+            this.jLabel7.setVisible(true);
+        } else if (this.jTextFieldName.getText().equals("")) {
+            this.jLabel5.setVisible(true);
+//            this.jLabel7.setVisible(false);
+
+        } else if (this.jTextFieldTrademark.getText().equals("")) {
+            this.jLabel6.setVisible(true);
+//            this.jLabel5.setVisible(false);
+
+        } else if (this.jTextFieldCommentary.getText().equals("")) {
+            this.jLabel7.setVisible(true);
+//            this.jLabel5.setVisible(false);
+
         } else {
             try {
-                    Projector projector=new Projector();
-                    projector.setName(jTextFieldName.getText());
-                    projector.setSerial((int) (Math.random() * 89999 + 10000)+"");
-                    projector.setTrademark(jTextFieldTrademark.getText());
-                    projector.setGoodCondition((String)jComboBoxCondition.getSelectedItem());
-                    projector.setCommentary(jTextFieldCommentary.getText());
-                    projector.setUsed(false);
+                Projector projector = new Projector();
+                projector.setName(jTextFieldName.getText());
+                projector.setSerial((int) (Math.random() * 89999 + 10000) + "");
+                projector.setTrademark(jTextFieldTrademark.getText());
+                projector.setGoodCondition((String) jComboBoxCondition.getSelectedItem());
+                projector.setCommentary(jTextFieldCommentary.getText());
+                projector.setUsed(false);
 
-                    System.out.println(projector.toString());
-                    System.out.println(projector.getSerial());
-                    this.mData.saveAudiovisual(projector);
-                    this.biblioTech.setMaterialsAudio(projector);
+                this.mData.saveAudiovisual(projector);
+                this.biblioTech.setMaterialsAudio(projector);
 
-                    System.out.println(mData.readAudiovisual());
-                    JOptionPane.showMessageDialog(null, "Registered material");
-                    this.jTextFieldName.setText("");
-                    this.jTextFieldCommentary.setText("");
-                    this.jTextFieldTrademark.setText("");
-                    
+                jLabel5.setVisible(false);
+                jLabel6.setVisible(false);
+                jLabel7.setVisible(false);
+                jLabel8.setVisible(true);
+                
+                t = new Timer(2000, actionYes);
+                t.start();
+                
+                this.jTextFieldName.setText("");
+                this.jTextFieldCommentary.setText("");
+                this.jTextFieldTrademark.setText("");
+
             } catch (IOException ex) {
                 Logger.getLogger(RegisterProjector.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -210,6 +271,10 @@ public class RegisterProjector extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextFieldCommentary;
     private javax.swing.JTextField jTextFieldName;
     private javax.swing.JTextField jTextFieldTrademark;

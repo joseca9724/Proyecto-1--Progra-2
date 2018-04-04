@@ -8,10 +8,13 @@ package gui;
 import data.MaterialData;
 import domain.BiblioTech;
 import domain.CD;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -24,10 +27,24 @@ public class RegisterCD extends javax.swing.JFrame {
      */
     private MaterialData mData;
     private BiblioTech biblioTech;
+    
+    private Timer t;
+    private ActionListener actionYes;
+    
     public RegisterCD() {
         initComponents();
+        jLabel5.setVisible(false);
+        jLabel6.setVisible(false);
+        jLabel8.setVisible(false);
         mData = new MaterialData();
         biblioTech = new BiblioTech();
+
+        this.actionYes = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jLabel8.setVisible(false);
+            }
+        };
     }
 
     /**
@@ -39,7 +56,6 @@ public class RegisterCD extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonBack = new javax.swing.JButton();
         jComboBoxContent = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -47,10 +63,11 @@ public class RegisterCD extends javax.swing.JFrame {
         jTextFieldName = new javax.swing.JTextField();
         jTextFieldCommentary = new javax.swing.JTextField();
         jButtonAdd = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jButtonBack.setText("Back");
 
         jComboBoxContent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Canciones", "Imagenes", "Materia" }));
 
@@ -73,12 +90,21 @@ public class RegisterCD extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel5.setText("*");
+
+        jLabel6.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel6.setText("*");
+
+        jLabel8.setForeground(new java.awt.Color(0, 204, 0));
+        jLabel8.setText("Registered material");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,11 +117,15 @@ public class RegisterCD extends javax.swing.JFrame {
                             .addComponent(jTextFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                             .addComponent(jTextFieldCommentary)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
+                        .addGap(83, 83, 83)
                         .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(75, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addComponent(jLabel8)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,7 +133,8 @@ public class RegisterCD extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -111,12 +142,13 @@ public class RegisterCD extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextFieldCommentary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(jTextFieldCommentary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAdd)
-                    .addComponent(jButtonBack))
-                .addContainerGap(46, Short.MAX_VALUE))
+                    .addComponent(jLabel8))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -128,8 +160,17 @@ public class RegisterCD extends javax.swing.JFrame {
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         // TODO add your handling code here:
-        if (this.jTextFieldName.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Error, Fill name space");
+        if (this.jTextFieldName.getText().equals("")&& this.jTextFieldCommentary.getText().equals("")) {
+            this.jLabel5.setVisible(true);
+            this.jLabel6.setVisible(true);
+        } else if (this.jTextFieldName.getText().equals("")) {
+            this.jLabel5.setVisible(true);
+//            this.jLabel7.setVisible(false);
+
+        } else if (this.jTextFieldCommentary.getText().equals("")) {
+            this.jLabel6.setVisible(true);
+//            this.jLabel5.setVisible(false);
+
         } else {
             
             
@@ -141,13 +182,17 @@ public class RegisterCD extends javax.swing.JFrame {
                 cd.setCommentary(jTextFieldCommentary.getText());
                 cd.setUsed(false);
                 
-                System.out.println(cd.toString());
-                System.out.println(cd.getSerial());
                 this.mData.saveAudiovisual(cd);
                 this.biblioTech.setMaterialsAudio(cd);
                 
-                System.out.println(mData.readAudiovisual());
-                JOptionPane.showMessageDialog(null, "Registered material");
+                jLabel5.setVisible(false);
+                jLabel6.setVisible(false);
+                jLabel8.setVisible(true);
+
+                t = new Timer(2000, actionYes);
+                t.start();
+                
+                
                 this.jTextFieldName.setText("");
                 this.jTextFieldCommentary.setText("");
             } catch (IOException ex) {
@@ -196,11 +241,13 @@ public class RegisterCD extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdd;
-    private javax.swing.JButton jButtonBack;
     private javax.swing.JComboBox<String> jComboBoxContent;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextFieldCommentary;
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
