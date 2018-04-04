@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -37,18 +39,23 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
     private Timer t;
     private ActionListener actionYes;
 
+    private Calendar cal;
+
     public RegisterPhysicalBook() {
         super("Register physical book");
         mData = new MaterialData();
         biblioTech = new BiblioTech();
         initComponents();
-        
+
         jLabel6.setVisible(false);
         jLabel7.setVisible(false);
         jLabel8.setVisible(false);
         jLabel9.setVisible(false);
         jLabel10.setVisible(false);
-        
+        jLabel12.setVisible(false);
+        jLabel14.setVisible(false);
+
+        cal = Calendar.getInstance();
 
         this.actionYes = new ActionListener() {
             @Override
@@ -56,7 +63,7 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
                 jLabel8.setVisible(false);
             }
         };
-        
+
         validNumbers(jTextField3);
         validNumbers(jTextField4);
     }
@@ -87,6 +94,8 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -107,7 +116,7 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
 
         jLabel5.setText("State of the book");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Good condition", "Disrepair" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Good condition", "Bad condition" }));
 
         jLabel8.setForeground(new java.awt.Color(0, 204, 0));
         jLabel8.setText("Registered material");
@@ -123,6 +132,12 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
 
         jLabel10.setForeground(new java.awt.Color(255, 51, 51));
         jLabel10.setText("*");
+
+        jLabel12.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel12.setText("Invalid quantity");
+
+        jLabel14.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel14.setText("Invalid year");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,26 +158,32 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField3)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                                     .addComponent(jTextField4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,13 +202,15 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel14))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel10)))
+                        .addComponent(jLabel10)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -228,12 +251,12 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
                 this.year = Integer.parseInt(this.jTextField3.getText());
                 this.quantity = Integer.parseInt(this.jTextField4.getText());
                 this.state = (String) this.jComboBox1.getSelectedItem();
-
-                if (this.year < 1950 || this.year > 2018) {
-                    JOptionPane.showMessageDialog(null, "Invalid year");
+                int actualYear = cal.get(Calendar.YEAR);;
+                if (this.year < 1950 || this.year > actualYear) {
+                    this.jLabel14.setVisible(true);
                     this.jTextField3.setText("");
                 } else if (this.quantity < 1) {
-                    JOptionPane.showMessageDialog(null, "Invalid amount");
+                    this.jLabel12.setVisible(true);
                     this.jTextField4.setText("");
                 } else {
 
@@ -255,7 +278,6 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
                     book.setType("Physical");
                     book.setUsed(false);
 
-                    System.out.println(book.toString());
                     this.mData.saveBook(book);
                     this.biblioTech.setMaterialsBooks(book);
 
@@ -264,6 +286,8 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
                     jLabel7.setVisible(false);
                     jLabel8.setVisible(true);
                     jLabel9.setVisible(false);
+                    this.jLabel14.setVisible(false);
+                    this.jLabel12.setVisible(false);
 
                     t = new Timer(2000, actionYes);
                     t.start();
@@ -303,6 +327,8 @@ public class RegisterPhysicalBook extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

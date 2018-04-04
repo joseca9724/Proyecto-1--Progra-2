@@ -14,8 +14,12 @@ import domain.StudentInfo;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -37,6 +41,8 @@ public class SignInStudent extends javax.swing.JFrame {
     private Timer t;
     private ActionListener actionYes;
 
+    Calendar cal = Calendar.getInstance();
+
     public SignInStudent() {
         super("Sign in");
         initComponents();
@@ -46,6 +52,13 @@ public class SignInStudent extends javax.swing.JFrame {
         this.jLabel5.setVisible(false);
         this.jLabel6.setVisible(false);
         this.jLabel7.setVisible(false);
+        this.jLabel8.setVisible(false);
+
+        cal = Calendar.getInstance();
+
+        validNumbers(jTextField1);
+        validNumbers(jTextField2);
+        validNumbers1(jTextField3);
 
         this.actionYes = new ActionListener() {
             @Override
@@ -55,6 +68,30 @@ public class SignInStudent extends javax.swing.JFrame {
         };
 
         this.pack();
+    }
+
+    public void validNumbers(javax.swing.JTextField a) {
+        a.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (Character.isDigit(c)) {
+                    e.consume();
+                }
+            }
+        });
+    }
+
+    public void validNumbers1(javax.swing.JTextField a) {
+        a.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    e.consume();
+                }
+            }
+        });
     }
 
     /**
@@ -72,15 +109,15 @@ public class SignInStudent extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(285, 265));
 
         jLabel1.setText("Name");
 
@@ -95,8 +132,6 @@ public class SignInStudent extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018" }));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Computing", "Education", "Agronomy" }));
 
@@ -117,6 +152,9 @@ public class SignInStudent extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 51, 51));
         jLabel7.setText("*");
 
+        jLabel8.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel8.setText("*");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,16 +174,17 @@ public class SignInStudent extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField2)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBox2, 0, 159, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTextField1))
+                    .addComponent(jTextField1)
+                    .addComponent(jTextField3))
                 .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
@@ -160,12 +199,13 @@ public class SignInStudent extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -188,6 +228,8 @@ public class SignInStudent extends javax.swing.JFrame {
         if (this.jTextField1.getText().equals("") && this.jTextField2.getText().equals("")) {
             this.jLabel5.setVisible(true);
             this.jLabel7.setVisible(true);
+            this.jLabel8.setVisible(true);
+
         } else if (this.jTextField1.getText().equals("")) {
             this.jLabel5.setVisible(true);
 //            this.jLabel7.setVisible(false);
@@ -195,79 +237,89 @@ public class SignInStudent extends javax.swing.JFrame {
         } else if (this.jTextField2.getText().equals("")) {
             this.jLabel7.setVisible(true);
 //            this.jLabel5.setVisible(false);
-        } else  {
+        } else if (this.jTextField3.getText().equals("")) {
+            this.jLabel8.setVisible(true);
+//            this.jLabel5.setVisible(false);
+        } else {
             this.name = this.jTextField1.getText();
             this.lastName = this.jTextField2.getText();
-            this.year = Integer.parseInt((String) this.jComboBox1.getSelectedItem());
-            this.career = (String) this.jComboBox2.getSelectedItem();
+            this.year = Integer.parseInt((String) this.jTextField3.getText());
 
-            if (career.equals("Computing")) {
-                try {
-                    StudentInfo student = new StudentInfo();
-                    student.setName(name);
-                    student.setLastName(lastName);
-                    student.setCarrer(career);
-                    student.setYear(year);
-                    list = this.studentData.readStudent();
-                    student.setUid(year, String.valueOf(list.size()));
-                    this.studentData.saveStudent(student);
-                    this.biblioTech.setStudents(student);
-                    System.out.println(this.studentData.readStudent());
-                } catch (IOException ex) {
-                    Logger.getLogger(SignInStudent.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(SignInStudent.class.getName()).log(Level.SEVERE, null, ex);
+            int actualYear = cal.get(Calendar.YEAR);;
+            if (this.year < 1950 || this.year > actualYear) {
+                JOptionPane.showMessageDialog(null, "Invalid year");
+                this.jTextField3.setText("");
+            } else {
+                this.career = (String) this.jComboBox2.getSelectedItem();
+
+                if (career.equals("Computing")) {
+                    try {
+                        StudentInfo student = new StudentInfo();
+                        student.setName(name);
+                        student.setLastName(lastName);
+                        student.setCarrer(career);
+                        student.setYear(year);
+                        list = this.studentData.readStudent();
+                        student.setUid(year, String.valueOf(list.size()));
+                        this.studentData.saveStudent(student);
+                        this.biblioTech.setStudents(student);
+                    } catch (IOException ex) {
+                        Logger.getLogger(SignInStudent.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(SignInStudent.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                } else if (career.equals("Education")) {
+                    try {
+                        StudentEdu student = new StudentEdu();
+                        student.setName(name);
+                        student.setLastName(lastName);
+                        student.setCarrer(career);
+                        student.setYear(year);
+                        list = this.studentData.readStudent();
+                        student.setUid(year, String.valueOf(list.size()));
+                        this.studentData.saveStudent(student);
+                        this.biblioTech.setStudents(student);
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(SignInStudent.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(SignInStudent.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                } else if (career.equals("Agronomy")) {
+                    try {
+                        StudentAgro student = new StudentAgro();
+                        student.setName(name);
+                        student.setLastName(lastName);
+                        student.setCarrer(career);
+                        student.setYear(year);
+                        list = this.studentData.readStudent();
+                        student.setUid(year, String.valueOf(list.size()));
+                        this.studentData.saveStudent(student);
+                        this.biblioTech.setStudents(student);
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(SignInStudent.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(SignInStudent.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
 
-            } else if (career.equals("Education")) {
-                try {
-                    StudentEdu student = new StudentEdu();
-                    student.setName(name);
-                    student.setLastName(lastName);
-                    student.setCarrer(career);
-                    student.setYear(year);
-                    list = this.studentData.readStudent();
-                    student.setUid(year, String.valueOf(list.size()));
-                    this.studentData.saveStudent(student);
-                    this.biblioTech.setStudents(student);
-                    System.out.println(this.studentData.readStudent());
+                this.jLabel5.setVisible(false);
+                this.jLabel7.setVisible(false);
+                this.jLabel8.setVisible(false);
+                this.jLabel6.setVisible(true);
 
-                } catch (IOException ex) {
-                    Logger.getLogger(SignInStudent.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(SignInStudent.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                t = new Timer(2000, actionYes);
+                t.start();
 
-            } else if (career.equals("Agronomy")) {
-                try {
-                    StudentAgro student = new StudentAgro();
-                    student.setName(name);
-                    student.setLastName(lastName);
-                    student.setCarrer(career);
-                    student.setYear(year);
-                    list = this.studentData.readStudent();
-                    student.setUid(year, String.valueOf(list.size()));
-                    this.studentData.saveStudent(student);
-                    this.biblioTech.setStudents(student);
-                    System.out.println(this.studentData.readStudent());
-
-                } catch (IOException ex) {
-                    Logger.getLogger(SignInStudent.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(SignInStudent.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                this.jTextField1.setText("");
+                this.jTextField2.setText("");
+                this.jTextField3.setText("");
 
             }
-
-            this.jLabel5.setVisible(false);
-            this.jLabel7.setVisible(false);
-            this.jLabel6.setVisible(true);
-
-            t = new Timer(2000, actionYes);
-            t.start();
-
-            this.jTextField1.setText("");
-            this.jTextField2.setText("");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -276,7 +328,6 @@ public class SignInStudent extends javax.swing.JFrame {
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -285,7 +336,9 @@ public class SignInStudent extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -32,9 +34,11 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
 
     private MaterialData mData;
     private BiblioTech biblioTech;
-    
+
     private Timer t;
     private ActionListener actionYes;
+
+    private Calendar cal;
 
     public RegisterDigitalBook() {
         super("Register digitar book");
@@ -42,15 +46,18 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
         biblioTech = new BiblioTech();
 
         initComponents();
-        
+
         jLabel6.setVisible(false);
         jLabel7.setVisible(false);
         jLabel8.setVisible(false);
         jLabel9.setVisible(false);
         jLabel10.setVisible(false);
         jLabel11.setVisible(false);
-        
-        
+        jLabel12.setVisible(false);
+        jLabel13.setVisible(false);
+        jLabel14.setVisible(false);
+
+        cal = Calendar.getInstance();
 
         this.actionYes = new ActionListener() {
             @Override
@@ -89,6 +96,9 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -127,6 +137,15 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(255, 51, 51));
         jLabel11.setText("*");
 
+        jLabel12.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel12.setText("Invalid quantity");
+
+        jLabel13.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel13.setText("Invalid size");
+
+        jLabel14.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel14.setText("Invalid year");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,8 +164,6 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                            .addComponent(jTextField2)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
@@ -154,10 +171,21 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
                                     .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                            .addComponent(jTextField2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
@@ -165,7 +193,7 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addContainerGap(154, Short.MAX_VALUE))))
+                        .addContainerGap(206, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,18 +213,21 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel14))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel13))
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -209,13 +240,12 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         if (this.jTextField1.getText().equals("") && this.jTextField2.getText().equals("") && this.jTextField3.getText().equals("") && this.jTextField4.getText().equals("") && this.jTextField5.getText().equals("")) {
+        if (this.jTextField1.getText().equals("") && this.jTextField2.getText().equals("") && this.jTextField3.getText().equals("") && this.jTextField4.getText().equals("") && this.jTextField5.getText().equals("")) {
             this.jLabel10.setVisible(true);
             this.jLabel6.setVisible(true);
             this.jLabel7.setVisible(true);
             this.jLabel9.setVisible(true);
             this.jLabel11.setVisible(true);
-            
 
         } else if (this.jTextField1.getText().equals("")) {
             this.jLabel7.setVisible(true);
@@ -229,10 +259,10 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
         } else if (this.jTextField4.getText().equals("")) {
             this.jLabel10.setVisible(true);
 
-        }else if (this.jTextField5.getText().equals("")) {
+        } else if (this.jTextField5.getText().equals("")) {
             this.jLabel11.setVisible(true);
 
-        }  else {
+        } else {
             try {
                 this.title = this.jTextField1.getText();
                 this.author = this.jTextField2.getText();
@@ -240,13 +270,14 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
                 this.sizeMB = Integer.parseInt(this.jTextField4.getText());
                 this.quantity = Integer.parseInt(this.jTextField5.getText());
 
-                if (this.year < 1950 || this.year > 2018) {
+                int actualYear = cal.get(Calendar.YEAR);;
+                if (this.year < 1950 || this.year > actualYear) {
                     JOptionPane.showMessageDialog(null, "Invalid year");
                     this.jTextField3.setText("");
                 } else if (this.sizeMB < 0 || this.sizeMB > 1000) {
-                    JOptionPane.showMessageDialog(null, "Invalid amount");
-                } else if (this.quantity < 0) {
-                    JOptionPane.showMessageDialog(null, "Invalid quantity");
+                    jLabel13.setVisible(true);
+                } else if (this.quantity <= 0) {
+                    jLabel12.setVisible(true);
                 } else {
 
                     DigitalBook book = new DigitalBook();
@@ -271,13 +302,24 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
                     this.mData.saveBook(book);
                     this.biblioTech.setMaterialsBooks(book);
 
-                    System.out.println(mData.readBook());
-                    JOptionPane.showMessageDialog(null, "Registered material");
+                    jLabel10.setVisible(false);
+                    jLabel6.setVisible(false);
+                    jLabel7.setVisible(false);
+                    jLabel8.setVisible(true);
+                    jLabel9.setVisible(false);
+                    jLabel11.setVisible(false);
+                    jLabel12.setVisible(false);
+                    jLabel13.setVisible(false);
+                    jLabel14.setVisible(false);
+
+                    t = new Timer(2000, actionYes);
+                    t.start();
+
                     this.jTextField1.setText("");
                     this.jTextField2.setText("");
                     this.jTextField3.setText("");
                     this.jTextField4.setText("");
-                    this.jTextField4.setText("");
+                    this.jTextField5.setText("");
 
                 }
 
@@ -309,6 +351,9 @@ public class RegisterDigitalBook extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
